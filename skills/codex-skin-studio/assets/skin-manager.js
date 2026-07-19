@@ -1397,14 +1397,11 @@
     const stage = commonInterfaceAncestor(heading, suggestions, main);
     if (!stage || stage === main) return;
     const hero = heading.parentElement;
-    const mark = hero
-      ? [...hero.children].find((element) => element !== heading && element.querySelector?.("svg"))
-      : null;
     const grid = findSuggestionGrid(suggestions, cards);
     markOpenDecoration(stage, "csss-open-landing-stage");
     syncOpenLandingScene(stage, design);
     markOpenDecoration(hero, "csss-open-landing-hero");
-    markOpenDecoration(mark, "csss-open-landing-mark");
+    // Leave the native home logo untouched — no accent plate/frame around it.
     markOpenDecoration(heading, "csss-open-landing-heading");
     markOpenDecoration(suggestions, "csss-open-landing-suggestions");
     markOpenDecoration(grid, "csss-open-landing-grid");
