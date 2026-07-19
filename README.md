@@ -188,16 +188,6 @@ SKILL_ROOT="${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio"
 
 完整边界见 [安全策略](SECURITY.md) 与 [运行时安全模型](skills/codex-skin-studio/references/security.md)。
 
-## 开发与打包
-
-```bash
-./tests/test-install.sh
-./scripts/package-release.sh
-./tests/test-release.sh
-```
-
-构建产物写入 `dist/`：完整仓库 ZIP 和独立 `.skill` 包。贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，涉及运行时的改动还应在真实 macOS Codex 中完成 `doctor`、`verify-theme`、`verify-ui` 与完整恢复检查。
-
 ## 许可
 
 [MIT License](LICENSE)。本项目与 OpenAI 无隶属或背书关系。截图中的主题媒体不包含在软件发行包中。

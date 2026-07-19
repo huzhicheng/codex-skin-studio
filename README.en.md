@@ -182,16 +182,6 @@ Since v0.16.3, Skin Studio reconciles active skin tokens across workspace change
 
 See the [security policy](SECURITY.md) and [runtime security model](skills/codex-skin-studio/references/security.md).
 
-## Development and packaging
-
-```bash
-./tests/test-install.sh
-./scripts/package-release.sh
-./tests/test-release.sh
-```
-
-Release artifacts are written to `dist/`: a complete repository ZIP and a standalone `.skill` package. Read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. Runtime changes should also pass live `doctor`, `verify-theme`, `verify-ui`, and full-restore checks on macOS.
-
 ## License
 
 [MIT License](LICENSE). This project is not affiliated with or endorsed by OpenAI. Media visible in screenshots is not included in the software distribution.
