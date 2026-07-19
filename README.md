@@ -4,31 +4,60 @@
 
 给 macOS Codex 桌面应用换上由本地图片或 MP4 驱动的完整界面皮肤。它会统一处理左侧导航、标题栏、工作区、卡片、输入区、菜单、设置页和弹窗，而不是在每个区域重复平铺一张壁纸。
 
-![Codex Skin Studio 海浪视频主题](docs/images/theme-01.webp)
+<p align="center">
+  <img src="docs/images/彩色.webp" width="92%" alt="彩色 · 完整界面巡览">
+  <br>
+  <em>“彩色” · 一段完整界面巡览：首页 → 皮肤管理 → 站点 → 已安排 → 插件</em>
+</p>
 
 > [!IMPORTANT]
 > 这是非 OpenAI 官方项目。目前仅支持 macOS 与签名有效的 Codex 桌面应用（bundle id：`com.openai.codex`）。项目不会修改 Codex 应用包、`app.asar`、代码签名或 `~/.codex/config.toml`。
 
 ## 效果预览
 
-皮肤可以使用静态图片，也可以使用本地循环 MP4。背景媒体始终保持原始色调；界面色板、层次、控件形态和可读性由 Skin Studio 单独处理。
+皮肤可以使用静态图片，也可以使用本地循环 MP4。背景媒体始终保持原始色调；界面色板、层次、控件形态和可读性由 Skin Studio 单独处理。以下均为真实保存的本机皮肤。
+
+### 视频主题（本地 MP4 · 界面实时动态）
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/images/theme-02.webp" alt="四只猫 Open 主题"></td>
-    <td width="50%"><img src="docs/images/theme-03.webp" alt="花卉内敛主题"></td>
+    <td width="50%" align="center"><img src="docs/images/地球.webp" width="100%" alt="地球"><br><b>地球</b></td>
+    <td width="50%" align="center"><img src="docs/images/猫咪.webp" width="100%" alt="猫咪"><br><b>猫咪</b></td>
   </tr>
   <tr>
-    <td align="center">Open / AI 设计</td>
-    <td align="center">内敛</td>
+    <td align="center"><img src="docs/images/清冷.webp" width="100%" alt="清冷"><br><b>清冷</b></td>
+    <td align="center"><img src="docs/images/山谷.webp" width="100%" alt="山谷"><br><b>山谷</b></td>
   </tr>
   <tr>
-    <td><img src="docs/images/theme-04.webp" alt="山谷视频主题"></td>
-    <td><img src="docs/images/theme-05.webp" alt="毛绒角色 Open 主题"></td>
+    <td align="center"><img src="docs/images/浪花.webp" width="100%" alt="浪花"><br><b>浪花</b></td>
+    <td align="center"><img src="docs/images/旷野.webp" width="100%" alt="旷野"><br><b>旷野</b></td>
   </tr>
   <tr>
-    <td align="center">本地 MP4</td>
-    <td align="center">Open / AI 设计</td>
+    <td align="center"><img src="docs/images/发光刀刃.webp" width="100%" alt="发光刀刃"><br><b>发光刀刃</b></td>
+    <td align="center"><img src="docs/images/伏提庚.webp" width="100%" alt="伏提庚"><br><b>伏提庚</b></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/古风美女.webp" width="100%" alt="古风美女"><br><b>古风美女</b></td>
+    <td align="center"><img src="docs/images/古风美女-2.webp" width="100%" alt="古风美女 其二"><br><b>古风美女 · 其二</b></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/images/彩色-2.webp" width="49%" alt="彩色 其二"><br><b>彩色 · 其二</b></td>
+  </tr>
+</table>
+
+### 图片主题（高清静态截图）
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src="docs/images/户外.png" width="100%" alt="户外"><br><b>户外</b></td>
+    <td width="50%" align="center"><img src="docs/images/小野花.png" width="100%" alt="小野花"><br><b>小野花</b></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/毛绒.png" width="100%" alt="毛绒"><br><b>毛绒</b></td>
+    <td align="center"><img src="docs/images/绿感.png" width="100%" alt="绿感"><br><b>绿感</b></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/images/鸣人.png" width="49%" alt="鸣人"><br><b>鸣人</b></td>
   </tr>
 </table>
 

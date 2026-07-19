@@ -4,31 +4,60 @@
 
 Full-interface, local image- and MP4-driven skins for the macOS Codex desktop app. Skin Studio coordinates the sidebar, title bar, workspace, cards, composer, menus, settings, and dialogs instead of tiling the same wallpaper into separate regions.
 
-![Codex Skin Studio ocean video theme](docs/images/theme-01.webp)
+<p align="center">
+  <img src="docs/images/彩色.webp" width="92%" alt="Full interface walkthrough">
+  <br>
+  <em>A full interface walkthrough: Home → Skin manager → Sites → Scheduled → Plugins</em>
+</p>
 
 > [!IMPORTANT]
 > This is an unofficial project. It currently supports macOS and the signed Codex desktop app with bundle identifier `com.openai.codex`. It never patches the app bundle, `app.asar`, its code signature, or `~/.codex/config.toml`.
 
 ## Gallery
 
-The background media keeps its original color treatment. Skin Studio separately derives accessible interface colors, translucency, control shapes, and text contrast.
+The background media keeps its original color treatment. Skin Studio separately derives accessible interface colors, translucency, control shapes, and text contrast. Every preview below is a real locally saved skin.
+
+### Video themes (local MP4 · live motion)
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/images/theme-02.webp" alt="Four cats Open theme"></td>
-    <td width="50%"><img src="docs/images/theme-03.webp" alt="Floral restrained theme"></td>
+    <td width="50%" align="center"><img src="docs/images/地球.webp" width="100%" alt="Earth"><br><b>地球 · Earth</b></td>
+    <td width="50%" align="center"><img src="docs/images/猫咪.webp" width="100%" alt="Cat"><br><b>猫咪 · Cat</b></td>
   </tr>
   <tr>
-    <td align="center">Open / AI design</td>
-    <td align="center">Restrained</td>
+    <td align="center"><img src="docs/images/清冷.webp" width="100%" alt="Cool"><br><b>清冷 · Cool</b></td>
+    <td align="center"><img src="docs/images/山谷.webp" width="100%" alt="Valley"><br><b>山谷 · Valley</b></td>
   </tr>
   <tr>
-    <td><img src="docs/images/theme-04.webp" alt="Valley video theme"></td>
-    <td><img src="docs/images/theme-05.webp" alt="Furry character Open theme"></td>
+    <td align="center"><img src="docs/images/浪花.webp" width="100%" alt="Wave"><br><b>浪花 · Wave</b></td>
+    <td align="center"><img src="docs/images/旷野.webp" width="100%" alt="Wilds"><br><b>旷野 · Wilds</b></td>
   </tr>
   <tr>
-    <td align="center">Local MP4</td>
-    <td align="center">Open / AI design</td>
+    <td align="center"><img src="docs/images/发光刀刃.webp" width="100%" alt="Glowing blade"><br><b>发光刀刃 · Blade</b></td>
+    <td align="center"><img src="docs/images/伏提庚.webp" width="100%" alt="Futing"><br><b>伏提庚</b></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/古风美女.webp" width="100%" alt="Classical"><br><b>古风美女 · Classical</b></td>
+    <td align="center"><img src="docs/images/古风美女-2.webp" width="100%" alt="Classical II"><br><b>古风美女 · II</b></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/images/彩色-2.webp" width="49%" alt="Colorful II"><br><b>彩色 · II</b></td>
+  </tr>
+</table>
+
+### Image themes (high-res stills)
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src="docs/images/户外.png" width="100%" alt="Outdoor"><br><b>户外 · Outdoor</b></td>
+    <td width="50%" align="center"><img src="docs/images/小野花.png" width="100%" alt="Wildflower"><br><b>小野花 · Wildflower</b></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/毛绒.png" width="100%" alt="Plush"><br><b>毛绒 · Plush</b></td>
+    <td align="center"><img src="docs/images/绿感.png" width="100%" alt="Verdant"><br><b>绿感 · Verdant</b></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/images/鸣人.png" width="49%" alt="Naruto"><br><b>鸣人 · Naruto</b></td>
   </tr>
 </table>
 
