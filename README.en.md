@@ -5,7 +5,7 @@
 Full-interface, local image- and MP4-driven skins for the macOS Codex desktop app. Skin Studio coordinates the sidebar, title bar, workspace, cards, composer, menus, settings, and dialogs instead of tiling the same wallpaper into separate regions.
 
 <p align="center">
-  <a href="docs/images/彩色.mp4"><img src="docs/images/彩色.webp" width="92%" alt="Full interface walkthrough"></a>
+  <a href="docs/images/彩色.mp4"><img src="docs/images/彩色.webp" width="80%" alt="Full interface walkthrough"></a>
   <br>
   <em>A full interface walkthrough: Home → Skin manager → Sites → Scheduled → Plugins &nbsp;·&nbsp; click the preview for the full-quality MP4</em>
 </p>
@@ -40,11 +40,9 @@ Previews are high-res looping animations — **click any preview to open its ful
   </tr>
   <tr>
     <td align="center"><a href="docs/images/古风美女.mp4"><img src="docs/images/古风美女.webp" width="100%" alt="Classical"></a><br><b>古风美女 · Classical</b></td>
-    <td align="center"><a href="docs/images/古风美女-2.mp4"><img src="docs/images/古风美女-2.webp" width="100%" alt="Classical II"></a><br><b>古风美女 · II</b></td>
+   
   </tr>
-  <tr>
-    <td colspan="2" align="center"><a href="docs/images/彩色-2.mp4"><img src="docs/images/彩色-2.webp" width="49%" alt="Colorful II"></a><br><b>彩色 · II</b></td>
-  </tr>
+ 
 </table>
 
 ### Image themes (high-res stills)
