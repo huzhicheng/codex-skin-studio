@@ -234,6 +234,22 @@ html.csss-themed main.main-surface {
     inset 0 1px 0 color-mix(in oklab, var(--csss-accent) 14%, transparent);
 }
 
+/* Full-page workspaces (Pull Requests, Sites, …) fill their list and detail
+   columns with opaque bg-token-main-surface-primary panels nested inside the
+   main surface, which hide the theme artwork. Let the translucent main surface
+   and artwork show through them instead of an opaque plate. */
+html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"] {
+  background-color: transparent !important;
+}
+
+/* Sticky sub-headers inside those panels must still mask rows scrolling beneath
+   them, so give them a themed translucent backdrop with a blur rather than a
+   fully transparent surface. */
+html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"][class~="sticky"] {
+  background-color: var(--csss-titlebar) !important;
+  backdrop-filter: blur(12px) saturate(1.1);
+}
+
 html.csss-themed header.app-header-tint {
   isolation: isolate;
   overflow: hidden;
