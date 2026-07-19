@@ -1048,6 +1048,45 @@ html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-op
   opacity: 1 !important;
 }
 
+/* Disabled send/stop action: without the enabled rule above it would keep only
+   the dark secondary surface, hiding its dark native glyph (an empty square).
+   Give it the same light fill and dark ink; the native opacity:0.5 still reads
+   as disabled. */
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-composer-action:disabled {
+  border-color: color-mix(in oklab, var(--csss-text) 60%, var(--csss-border)) !important;
+  background: var(--csss-text) !important;
+  background-color: var(--csss-text) !important;
+  background-image: none !important;
+  color: var(--csss-bg) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-composer-action:disabled :is(svg, path, rect, circle) {
+  color: var(--csss-bg) !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* Native solid-light chips (bg-token-foreground: light fill + dark ink, e.g. the
+   rate-limit "查看重置次数" action) must not inherit Open's dark secondary surface,
+   which would leave dark text on a dark plate. Restore a legible light fill with
+   dark ink. The composer send/stop action is handled by its own rules above. */
+html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) {
+  border-color: color-mix(in oklab, var(--csss-text) 68%, var(--csss-border)) !important;
+  background: var(--csss-text) !important;
+  background-color: var(--csss-text) !important;
+  background-image: none !important;
+  color: var(--csss-bg) !important;
+}
+
+html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) * {
+  color: inherit !important;
+}
+
+html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) :is(svg, path, rect, circle) {
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
 html.csss-themed[data-csss-style="open"] :is(
   [role="dialog"],
   [role="menu"],

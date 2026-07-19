@@ -1451,6 +1451,15 @@
         "border-color": "transparent",
       },
     }[design.controls.secondary];
+    // Native solid-light chips (bg-token-foreground: light fill + dark ink, e.g.
+    // the rate-limit action or the composer send button). They must keep a light
+    // fill and dark ink — painting them with the dark secondary surface leaves
+    // dark text on a dark plate (invisible).
+    const solidStyles = {
+      background: "var(--csss-text)",
+      color: "var(--csss-bg)",
+      "border-color": "color-mix(in oklab, var(--csss-text) 68%, var(--csss-border))",
+    };
     const cardStyles = {
       flat: {
         background: "color-mix(in oklab, var(--csss-surface) 86%, transparent)",
@@ -1505,7 +1514,13 @@
     const main = document.querySelector("main.main-surface");
     for (const button of [...(main?.querySelectorAll("button") || [])].slice(0, 240)) {
       const className = String(button.className || "");
-      if (className.includes("border-token-border")) {
+      const solid = className.includes("bg-token-foreground");
+      if (solid) {
+        markOpenDecoration(button, "csss-open-control", {
+          "border-radius": `${design.controls.radius}px`,
+          ...solidStyles,
+        });
+      } else if (className.includes("border-token-border")) {
         markOpenDecoration(button, "csss-open-control", {
           "border-radius": `${design.controls.radius}px`,
           ...secondaryStyles,
