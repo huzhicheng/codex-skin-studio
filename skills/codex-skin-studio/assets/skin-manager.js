@@ -132,6 +132,11 @@
     observer: null,
     rootObserver: null,
     reconcileFrame: null,
+    ensureFrame: null,
+    decorationFrame: null,
+    decorationTimer: null,
+    decorationTransitionUntil: 0,
+    nativeOverlayHandler: null,
     codexTokens: null,
     shapeTokens: null,
     saveTimer: null,
@@ -1222,7 +1227,7 @@
 
   function markOpenDecoration(element, className, inlineStyles = {}) {
     if (!element) return;
-    element.classList.add(className);
+    if (!element.classList.contains(className)) element.classList.add(className);
     state.decorated.add(element);
     let originals = state.openInline.get(element);
     if (!originals) {
@@ -1236,8 +1241,53 @@
           priority: element.style.getPropertyPriority(name),
         });
       }
-      element.style.setProperty(name, value, "important");
+      if (element.style.getPropertyValue(name) !== value ||
+        element.style.getPropertyPriority(name) !== "important") {
+        element.style.setProperty(name, value, "important");
+      }
     }
+  }
+
+  function scheduleOpenDecoration(delay = 0) {
+    const transitionDelay = Math.max(0, state.decorationTransitionUntil - performance.now());
+    const wait = Math.max(delay, transitionDelay);
+    if (wait > 0) {
+      if (state.decorationFrame != null) {
+        cancelAnimationFrame(state.decorationFrame);
+        state.decorationFrame = null;
+      }
+      if (state.decorationTimer != null) return;
+      state.decorationTimer = setTimeout(() => {
+        state.decorationTimer = null;
+        scheduleOpenDecoration();
+      }, Math.ceil(wait) + 16);
+      return;
+    }
+    if (state.decorationFrame != null) return;
+    state.decorationFrame = requestAnimationFrame(() => {
+      state.decorationFrame = null;
+      try {
+        mountNavigationLauncher();
+        decorateOpenInterface();
+      } catch {}
+    });
+  }
+
+  function deferForNativeOverlayNavigation(event) {
+    const control = event.target?.closest?.(
+      '[role="menuitem"], [role="option"], [role="dialog"] button, [data-radix-popper-content-wrapper] button',
+    );
+    if (!control || state.ui?.contains(control)) return;
+    state.decorationTransitionUntil = performance.now() + 1800;
+    if (state.decorationFrame != null) {
+      cancelAnimationFrame(state.decorationFrame);
+      state.decorationFrame = null;
+    }
+    if (state.decorationTimer != null) {
+      clearTimeout(state.decorationTimer);
+      state.decorationTimer = null;
+    }
+    scheduleOpenDecoration();
   }
 
   function isVisibleInterfaceElement(element) {
@@ -1452,9 +1502,8 @@
       markOpenDecoration(label, "csss-open-nav-label");
       if (icon && button.id !== "csss-nav-launcher") navIconIndex += 1;
     }
-    for (const button of document.querySelectorAll(
-      'main.main-surface button, [role="dialog"] button, [role="menu"] button, [role="listbox"] button',
-    )) {
+    const main = document.querySelector("main.main-surface");
+    for (const button of [...(main?.querySelectorAll("button") || [])].slice(0, 240)) {
       const className = String(button.className || "");
       if (className.includes("border-token-border")) {
         markOpenDecoration(button, "csss-open-control", {
@@ -1469,9 +1518,9 @@
         });
       }
     }
-    for (const element of document.querySelectorAll(
-      'main.main-surface [class*="border-token-border"][class*="rounded-"]',
-    )) {
+    for (const element of [...(main?.querySelectorAll(
+      '[class*="border-token-border"][class*="rounded-"]',
+    ) || [])].slice(0, 180)) {
       if (element.tagName !== "BUTTON") {
         markOpenDecoration(element, "csss-open-card", {
           "border-radius": `${design.cards.radius}px`,
@@ -1487,17 +1536,8 @@
         markOpenDecoration(button, "csss-open-composer-action");
       }
     }
-    for (const field of document.querySelectorAll(
-      "main.main-surface input, main.main-surface textarea, main.main-surface select, [role='dialog'] input, [role='dialog'] textarea, [role='dialog'] select",
-    )) {
+    for (const field of [...(main?.querySelectorAll("input, textarea, select") || [])].slice(0, 120)) {
       markOpenDecoration(field, "csss-open-field", { "border-radius": `${design.fields.radius}px` });
-    }
-    for (const overlay of document.querySelectorAll(
-      '[role="dialog"], [role="menu"], [role="listbox"], [data-radix-popper-content-wrapper] > *',
-    )) {
-      markOpenDecoration(overlay, "csss-open-overlay", {
-        "border-radius": `${design.overlays.radius}px`,
-      });
     }
     decorateOpenLanding(design);
   }
@@ -2572,6 +2612,8 @@
       if (event.key === "Escape" && state.open) setOpen(false);
     };
     document.addEventListener("keydown", state.keyHandler);
+    state.nativeOverlayHandler = (event) => deferForNativeOverlayNavigation(event);
+    document.addEventListener("click", state.nativeOverlayHandler, true);
     state.motionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)") || null;
     state.visibilityHandler = () => updateVideoPlayback();
     state.motionHandler = () => updateVideoPlayback();
@@ -2595,9 +2637,25 @@
     if (!state.art.isConnected) document.body.appendChild(state.art);
     if (!state.ui.isConnected) document.body.appendChild(state.ui);
     mountNavigationLauncher();
-    decorateOpenInterface();
+    scheduleOpenDecoration();
     rootElement.classList.add("csss-ready");
     state.ui.dataset.open = String(state.open);
+  }
+
+  // Never re-insert managed nodes synchronously inside the MutationObserver
+  // callback: ensure() appends to <body>, which is itself a childList mutation
+  // that re-invokes the observer. If the host app removes our nodes during a
+  // re-render (e.g. opening Settings tears down and rebuilds the body subtree),
+  // a synchronous ensure() would trade mutations with it on the microtask queue
+  // forever, never yielding to layout, paint, or input — a hard freeze. Deferring
+  // to an animation frame (with a re-entrancy guard) caps the exchange to at most
+  // one reconcile per frame, so the interface stays responsive.
+  function scheduleEnsure() {
+    if (state.ensureFrame != null) return;
+    state.ensureFrame = requestAnimationFrame(() => {
+      state.ensureFrame = null;
+      try { ensure(); } catch {}
+    });
   }
 
   function destroy({ removeManager = true, clearActive = false } = {}) {
@@ -2608,11 +2666,15 @@
     state.observer?.disconnect();
     state.rootObserver?.disconnect();
     if (state.keyHandler) document.removeEventListener("keydown", state.keyHandler);
+    if (state.nativeOverlayHandler) document.removeEventListener("click", state.nativeOverlayHandler, true);
     if (state.visibilityHandler) document.removeEventListener("visibilitychange", state.visibilityHandler);
     state.motionQuery?.removeEventListener?.("change", state.motionHandler);
     if (state.resizeHandler) window.removeEventListener("resize", state.resizeHandler);
     if (state.resizeFrame != null) cancelAnimationFrame(state.resizeFrame);
     if (state.reconcileFrame != null) cancelAnimationFrame(state.reconcileFrame);
+    if (state.ensureFrame != null) cancelAnimationFrame(state.ensureFrame);
+    if (state.decorationFrame != null) cancelAnimationFrame(state.decorationFrame);
+    if (state.decorationTimer != null) clearTimeout(state.decorationTimer);
     releaseVideoMedia();
     rootElement.classList.remove("csss-ready", "csss-themed");
     rootElement.removeAttribute("data-csss-mode");
@@ -2738,8 +2800,8 @@
     ensure();
     bindEvents();
     state.observer = new MutationObserver(() => {
-      if (!state.ui?.isConnected || !state.art?.isConnected || !state.style?.isConnected || !state.navEntry?.isConnected) ensure();
-      decorateOpenInterface();
+      if (!state.ui?.isConnected || !state.art?.isConnected || !state.style?.isConnected) scheduleEnsure();
+      else scheduleOpenDecoration();
     });
     state.observer.observe(rootElement, { childList: true, subtree: true });
     state.rootObserver = new MutationObserver(() => scheduleThemeVariableReconciliation());

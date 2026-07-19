@@ -169,7 +169,7 @@ Playback and decode errors stay inside the visual layer. The locally extracted p
 
 ### Contrast changes after switching ChatGPT/Codex workspaces
 
-Since v0.16.3, Skin Studio reconciles active skin tokens across workspace changes and independently protects sidebar labels, icons, and the active Send/Stop action.
+Since v0.16.3, Skin Studio reconciles active skin tokens across workspace changes and independently protects sidebar labels, icons, and the active Send/Stop action. v0.16.4 additionally isolates native overlay navigation such as the profile menu and Settings so decorative rescans cannot block the renderer.
 
 ## Privacy and security
 

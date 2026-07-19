@@ -175,7 +175,7 @@ SKILL_ROOT="${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio"
 
 ### 深浅色切换后文字或停止按钮看不清
 
-从 v0.16.3 起，Skin Studio 会在 ChatGPT/Codex 工作区切换时重新校准皮肤变量，并单独保护导航文字、图标和发送/停止按钮的语义对比度。
+从 v0.16.3 起，Skin Studio 会在 ChatGPT/Codex 工作区切换时重新校准皮肤变量，并单独保护导航文字、图标和发送/停止按钮的语义对比度。v0.16.4 进一步隔离头像菜单、设置页等原生弹层导航，避免皮肤装饰重绘阻塞界面。
 
 ## 隐私与安全
 

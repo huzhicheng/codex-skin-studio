@@ -5,7 +5,7 @@ import { spawn, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
-const VERSION = "0.16.3";
+const VERSION = "0.16.4";
 const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "[::1]", "::1"]);
 const GENERATION_TIMEOUT_MS = 180000;
 const MAX_MANIFEST_BYTES = 64 * 1024;
@@ -170,8 +170,14 @@ class CdpSession {
   }
 
   close() {
-    if (!this.closed) this.socket.close();
+    if (this.closed) return;
     this.closed = true;
+    for (const waiter of this.pending.values()) {
+      clearTimeout(waiter.timeout);
+      waiter.reject(new Error("CDP session closed"));
+    }
+    this.pending.clear();
+    try { this.socket.close(); } catch {}
   }
 }
 
@@ -943,6 +949,9 @@ async function watch(options) {
   let requestedAction = null;
   let endpointUnavailableSince = null;
   let endpointWarningLogged = false;
+  let rendererUnavailableSince = null;
+  let rendererWarningLogged = false;
+  const sessionFailures = new Map();
   const stop = () => { stopping = true; };
   process.on("SIGINT", stop);
   process.on("SIGTERM", stop);
@@ -976,6 +985,7 @@ async function watch(options) {
         generationJobs.get(id)?.controller.abort();
         session.close();
         sessions.delete(id);
+        sessionFailures.delete(id);
       }
     }
 
@@ -990,16 +1000,30 @@ async function watch(options) {
           }), 220);
         });
         await apply(session, payload);
+        session.commandTimeoutMs = 5000;
         sessions.set(target.id, session);
+        rendererUnavailableSince = null;
+        rendererWarningLogged = false;
         console.log(`[skin-studio] attached ${target.id} ${target.title || target.url}`);
       } catch (error) {
-        console.error(`[skin-studio] target rejected: ${error.message}`);
+        rendererUnavailableSince ||= Date.now();
+        if (!rendererWarningLogged) {
+          rendererWarningLogged = true;
+          console.error(`[skin-studio] renderer temporarily unavailable; waiting safely without restarting Codex`);
+        }
+        if (Date.now() - rendererUnavailableSince > 12000) {
+          console.error(`[skin-studio] renderer unavailable for 12s; watcher is stopping safely`);
+          stopping = true;
+        } else {
+          console.error(`[skin-studio] target rejected: ${error.message}`);
+        }
       }
     }
 
     for (const session of sessions.values()) {
       try {
         const command = await readCommand(session);
+        sessionFailures.delete(session.target.id);
         if (command?.type === "generate-open-design") {
           const targetId = session.target.id;
           if (generationJobs.has(targetId)) {
@@ -1033,7 +1057,16 @@ async function watch(options) {
           stopping = true;
           break;
         }
-      } catch {}
+      } catch (error) {
+        const failure = sessionFailures.get(session.target.id) || { count: 0, since: Date.now() };
+        failure.count += 1;
+        sessionFailures.set(session.target.id, failure);
+        if (failure.count >= 2 || Date.now() - failure.since > 12000) {
+          console.error(`[skin-studio] attached renderer stayed unresponsive; watcher is stopping safely without restarting Codex`);
+          stopping = true;
+          break;
+        }
+      }
     }
     if (!stopping) await new Promise((resolve) => setTimeout(resolve, 500));
   }
