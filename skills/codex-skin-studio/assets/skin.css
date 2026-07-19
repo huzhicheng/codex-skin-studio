@@ -250,6 +250,15 @@ html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"][clas
   backdrop-filter: blur(12px) saturate(1.1);
 }
 
+/* The detail column of these workspaces is an <aside> nested in the main
+   surface, so the generic right-panel rule painted it with the heavier
+   --csss-right material — it read noticeably darker than the list column next
+   to it. Match the workspace tint (the ID in the base rule's :not() gives it
+   high specificity, so keep the extra qualifiers here). */
+html.csss-themed main.main-surface aside:not(.app-shell-left-panel):not(#csss-panel) {
+  background-color: transparent !important;
+}
+
 html.csss-themed header.app-header-tint {
   isolation: isolate;
   overflow: hidden;
