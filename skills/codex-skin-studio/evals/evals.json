@@ -1,0 +1,23 @@
+{
+  "skill_name": "codex-skin-studio",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我刚在一台新的 Mac 上安装了 Codex，并从 GitHub 安装了 codex-skin-studio。请检查环境、创建桌面启动器，然后安全启动皮肤管理器；如果必须重启 Codex，先明确询问我。",
+      "expected_output": "Runs doctor and launcher installation, diagnoses whether the verified endpoint is available, and never restarts an active Codex process without explicit approval.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "使用 codex-skin-studio 启动皮肤管理器。我想导入一个 MP4，并确保播放失败时只回退到封面图，不影响 Codex 启动。",
+      "expected_output": "Starts through the bundled launcher, keeps MP4 local, uses poster fallback, and contains media failures inside the visual layer.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "把 Codex 完全恢复成官方界面，停止皮肤注入，并告诉我如何卸载 Skill 但暂时保留本地主题。",
+      "expected_output": "Uses the full restore path, stops the watcher, returns Codex to a normal launch, and explains non-destructive uninstall versus purge-data.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+# Codex Skin Studio
+
+[中文](README.md) · [English](README.en.md)
+
+给 macOS Codex 桌面应用换上由本地图片或 MP4 驱动的完整界面皮肤。它会统一处理左侧导航、标题栏、工作区、卡片、输入区、菜单、设置页和弹窗，而不是在每个区域重复平铺一张壁纸。
+
+![Codex Skin Studio 海浪视频主题](docs/images/theme-01.webp)
+
+> [!IMPORTANT]
+> 这是非 OpenAI 官方项目。目前仅支持 macOS 与签名有效的 Codex 桌面应用（bundle id：`com.openai.codex`）。项目不会修改 Codex 应用包、`app.asar`、代码签名或 `~/.codex/config.toml`。
+
+## 效果预览
+
+皮肤可以使用静态图片，也可以使用本地循环 MP4。背景媒体始终保持原始色调；界面色板、层次、控件形态和可读性由 Skin Studio 单独处理。
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/theme-02.webp" alt="四只猫 Open 主题"></td>
+    <td width="50%"><img src="docs/images/theme-03.webp" alt="花卉内敛主题"></td>
+  </tr>
+  <tr>
+    <td align="center">Open / AI 设计</td>
+    <td align="center">内敛</td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/theme-04.webp" alt="山谷视频主题"></td>
+    <td><img src="docs/images/theme-05.webp" alt="毛绒角色 Open 主题"></td>
+  </tr>
+  <tr>
+    <td align="center">本地 MP4</td>
+    <td align="center">Open / AI 设计</td>
+  </tr>
+</table>
+
+![Codex Skin Studio 皮肤管理器](docs/images/skin-manager.webp)
+
+截图来自真实保存的本地皮肤，仅用于展示界面效果；仓库不包含截图中的原始主题图片或视频。
+
+## 主要能力
+
+- 一张图片或一个 MP4 覆盖整个 Codex 窗口，自动 `cover` 铺满并支持焦点位置、透明度、内容清晰度和模糊调节。
+- 原生风格的“皮肤”侧栏入口，以及应用内的保存、切换、重命名、删除和暂停管理。
+- **内敛**、**灵动**和 Skill 生成的 **AI 设计**三种界面语言。
+- 从媒体提取可访问的界面色板，但不对背景媒体做增艳、变色、黑白、双色或电影调色。
+- “设计UI”会根据当前图片或 MP4 封面帧生成受约束的结构化 Open 方案，可独立设计导航节奏、标题、首页构图、卡片和按钮。
+- 自动适配 Codex 的浅色/深色状态，并保护导航图标、文字、发送/停止按钮的对比度。
+- Codex 更新后的兼容性预检、异常回滚、视频封面回退和一键恢复官方界面。
+
+## 安装
+
+### 方法一：下载后双击
+
+1. 在 GitHub 页面选择 **Code → Download ZIP**，下载并解压完整仓库。
+2. 右键打开 `Install Codex Skin Studio.command`。
+3. 安装器会验证本机 Codex，把 Skill 安装到 `~/.codex/skills/codex-skin-studio`，并在桌面创建启动和恢复入口。
+4. 安装完成后重启一次 Codex，让新 Skill 出现在可用列表中。
+
+macOS 首次打开下载的 `.command` 可能要求确认来源。请使用右键菜单中的“打开”，无需关闭系统安全保护。
+
+### 方法二：终端安装
+
+```bash
+git clone https://github.com/huzhicheng/codex-skin-studio.git
+cd codex-skin-studio
+./install.sh
+```
+
+安装并立即尝试启动：
+
+```bash
+./install.sh --activate
+```
+
+安装器可以重复运行来升级。升级 Skill 不会删除已保存的本地主题。
+
+### 方法三：让 Codex 安装
+
+把本仓库地址发给 Codex，然后说：
+
+> 使用 skill-installer 安装这个仓库中 `skills/codex-skin-studio` 路径的 Skill。
+
+安装完成并重启一次 Codex 后，再说：
+
+> 使用 codex-skin-studio 安装桌面启动器。
+
+## 第一次使用
+
+最简单的方式是对 Codex 说：
+
+> 使用 codex-skin-studio 启动皮肤管理器。
+
+也可以双击桌面入口：
+
+- `Codex Skin Studio.command`：按需启动；如确实需要重启，会先询问。
+- `Codex Skin Studio - Auto Start.command`：用户主动双击后允许完成一次启动切换。
+- `Codex Skin Studio - Restore.command`：清除皮肤并以官方方式正常重启 Codex。
+
+启动成功后，“皮肤”会出现在 Codex 主侧栏动作区。接下来的典型流程是：
+
+1. 点击“皮肤”，选择一张图片或一个 MP4。
+2. 调整媒体焦点，让人物或主体保持在合适位置。
+3. 在 **内敛**、**灵动**之间即时切换。
+4. 想要当前媒体专属的界面语言时，选择生成胆量并点击 **设计UI**。
+5. 生成完成后切换到 **AI 设计**；不满意可以重新生成，或随时退回自动的灵动模板。
+
+## 面板和 Skill 分别做什么
+
+应用内面板负责高频、可视化操作：导入媒体、切换皮肤、调整强度、删除主题和恢复外观。
+
+`codex-skin-studio` Skill 负责需要推理或系统边界的工作：首次安装、兼容性诊断、安全启动、异常恢复，以及读取当前媒体后生成符合结构化安全约束的独立 UI 设计。换一张图片后再次点击“设计UI”，得到的是属于这张图片的新方案，不是固定模板换色。
+
+## 界面风格
+
+- **内敛**：保留 Codex 原生控件比例，用主题色和半透明材质统一全窗口。
+- **灵动**：自动 Open 模板，会改变首页、导航选中态、按钮、卡片和输入区的表现。
+- **AI 设计**：由 Skill 为当前媒体生成的独立结构化方案；生成前不可选，生成后会和当前皮肤一起保存。
+- **生成胆量**：沉稳、奔放、疯狂只影响下一次“设计UI”的结构大胆程度，不会改变原图色调。
+
+## 常用命令
+
+```bash
+SKILL_ROOT="${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio"
+
+/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" doctor
+/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" install-launchers
+/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" start
+/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" status
+/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" restore
+/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" restore --restart
+```
+
+## 恢复与卸载
+
+只恢复官方界面、不重启 Codex：
+
+```bash
+/bin/bash "${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio/scripts/skin-studio.sh" restore
+```
+
+完全恢复并正常重启：
+
+```bash
+/bin/bash "${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio/scripts/skin-studio.sh" restore --restart
+```
+
+卸载 Skill 和桌面入口，但保留本地主题：
+
+```bash
+./uninstall.sh
+```
+
+同时删除本地主题和日志：
+
+```bash
+./uninstall.sh --restart --purge-data
+```
+
+## 常见问题
+
+### 安装后没有“皮肤”入口
+
+先重启一次 Codex 让 Skill 被发现，然后双击 `Codex Skin Studio - Auto Start.command`，或运行 `doctor` 后再执行 `start`。如果纯净启动正常而皮肤启动失败，Skin Studio 会回滚注入并保持 Codex 可用，不会自动反复重启。
+
+### Codex 升级后界面卡住或入口消失
+
+先执行 `doctor` 和 `status`。选择器不兼容时项目会失败关闭，不会扩大匹配范围或修改应用包。可先执行 `restore` 使用官方界面，再更新 Skin Studio。
+
+### 图片没有铺满，或人物太大
+
+背景默认使用整窗 `cover`，不会为了显示完整图片而缩小留边。使用管理器里的焦点位置保护主体；横竖比差异很大时，窗口边缘会按 `cover` 规则裁切。
+
+### MP4 无法播放
+
+视频解码或播放失败只影响视觉层，Skin Studio 会保留本地提取的封面帧；异常不会触发 Codex 重启。
+
+### 深浅色切换后文字或停止按钮看不清
+
+从 v0.16.3 起，Skin Studio 会在 ChatGPT/Codex 工作区切换时重新校准皮肤变量，并单独保护导航文字、图标和发送/停止按钮的语义对比度。
+
+## 隐私与安全
+
+- 图片和 MP4 默认只保存在本机的 Skin Studio 数据中。
+- 只有你主动点击 **设计UI** 时，当前图片或 MP4 的本地封面帧才会交给一次临时 Codex 设计请求；MP4 文件本身不会发送。
+- 生成结果必须通过版本化结构化方案校验，不接受任意 CSS、HTML、JavaScript、URL、远程字体或 shell 命令。
+- 调试端口只绑定 `127.0.0.1`，目标还必须通过 `app://` 与 Codex 壳层校验。
+- 皮肤模式使用独立 Chromium 用户目录，不复制官方配置中的 Cookies、Local Storage、Preferences 或会话文件。
+- 启动只有一次有界尝试；检查失败时回滚皮肤并保留 Codex，不进入自动重启循环。
+
+完整边界见 [安全策略](SECURITY.md) 与 [运行时安全模型](skills/codex-skin-studio/references/security.md)。
+
+## 开发与打包
+
+```bash
+./tests/test-install.sh
+./scripts/package-release.sh
+./tests/test-release.sh
+```
+
+构建产物写入 `dist/`：完整仓库 ZIP 和独立 `.skill` 包。贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，涉及运行时的改动还应在真实 macOS Codex 中完成 `doctor`、`verify-theme`、`verify-ui` 与完整恢复检查。
+
+## 许可
+
+[MIT License](LICENSE)。本项目与 OpenAI 无隶属或背书关系。截图中的主题媒体不包含在软件发行包中。
