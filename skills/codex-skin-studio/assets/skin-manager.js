@@ -1319,50 +1319,21 @@
     return cards[0]?.parentElement?.parentElement || null;
   }
 
-  function syncOpenLandingScene(stage, design) {
+  function syncOpenLandingScene(stage) {
     for (const element of [...state.generated]) {
       if (!element.isConnected) state.generated.delete(element);
     }
-    let scene = [...stage.children].find((element) =>
+    const scene = [...stage.children].find((element) =>
       element.classList?.contains("csss-open-landing-scene") &&
       element.dataset?.csssOwned === "true");
-    const stagecraft = design.stagecraft || {};
-    const needsScene = stagecraft.archetype !== "none" ||
-      stagecraft.keywordMode !== "none" || stagecraft.frame !== "none";
-    if (!needsScene) {
-      if (scene) {
-        state.generated.delete(scene);
-        scene.remove();
-      }
-      return;
+    // The stagecraft "scene" overlay printed the theme name and keywords as large
+    // watermark/label text (plus torn/film frame lines) over the home hero. That
+    // literal text reads as intrusive clutter, so never render it — the archetype
+    // layout composition on the stage/hero/grid is unaffected.
+    if (scene) {
+      state.generated.delete(scene);
+      scene.remove();
     }
-    if (!scene) {
-      scene = document.createElement("div");
-      scene.className = "csss-open-landing-scene";
-      scene.dataset.csssOwned = "true";
-      scene.setAttribute("aria-hidden", "true");
-      stage.prepend(scene);
-      state.generated.add(scene);
-    }
-    const signature = [
-      stagecraft.keywordMode,
-      design.identity.name,
-      ...design.identity.keywords.slice(0, 4),
-    ].join("\u001f");
-    if (scene.dataset.csssSignature === signature) return;
-    scene.dataset.csssSignature = signature;
-    scene.replaceChildren();
-    if (stagecraft.keywordMode === "none") return;
-    const title = document.createElement("span");
-    title.className = "csss-scene-title";
-    title.textContent = design.identity.name;
-    scene.append(title);
-    design.identity.keywords.slice(0, 4).forEach((keyword, index) => {
-      const label = document.createElement("span");
-      label.className = `csss-scene-keyword csss-scene-keyword-${index + 1}`;
-      label.textContent = keyword;
-      scene.append(label);
-    });
   }
 
   function decorateOpenLanding(design) {
@@ -1399,7 +1370,7 @@
     const hero = heading.parentElement;
     const grid = findSuggestionGrid(suggestions, cards);
     markOpenDecoration(stage, "csss-open-landing-stage");
-    syncOpenLandingScene(stage, design);
+    syncOpenLandingScene(stage);
     markOpenDecoration(hero, "csss-open-landing-hero");
     // Leave the native home logo untouched — no accent plate/frame around it.
     markOpenDecoration(heading, "csss-open-landing-heading");
