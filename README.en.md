@@ -5,7 +5,7 @@
 Full-interface, local image- and MP4-driven skins for the macOS Codex desktop app. Skin Studio coordinates the sidebar, title bar, workspace, cards, composer, menus, settings, and dialogs instead of tiling the same wallpaper into separate regions.
 
 <p align="center">
-  <a href="docs/images/彩色.mp4"><img src="docs/images/彩色.webp" width="80%" alt="Full interface walkthrough"></a>
+  <a href="docs/images/彩色.mp4"><img src="docs/images/彩色.webp" width="60%" alt="Full interface walkthrough"></a>
   <br>
   <em>A full interface walkthrough: Home → Skin manager → Sites → Scheduled → Plugins &nbsp;·&nbsp; click the preview for the full-quality MP4</em>
 </p>
