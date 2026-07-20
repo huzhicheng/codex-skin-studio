@@ -49,15 +49,15 @@ Previews are high-res looping animations — **click any preview to open its ful
 
 <table>
   <tr>
-    <td width="50%" align="center"><img src="docs/images/户外.png" width="100%" alt="Outdoor"><br><b>户外 · Outdoor</b></td>
+    <td colspan="2" align="center"><img src="docs/images/户外.png" width="80%" alt="Outdoor"><br><b>户外 · Outdoor</b></td>
+  </tr>
+  <tr>
     <td width="50%" align="center"><img src="docs/images/小野花.png" width="100%" alt="Wildflower"><br><b>小野花 · Wildflower</b></td>
+    <td width="50%" align="center"><img src="docs/images/毛绒.png" width="100%" alt="Plush"><br><b>毛绒 · Plush</b></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/images/毛绒.png" width="100%" alt="Plush"><br><b>毛绒 · Plush</b></td>
     <td align="center"><img src="docs/images/绿感.png" width="100%" alt="Verdant"><br><b>绿感 · Verdant</b></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><img src="docs/images/鸣人.png" width="49%" alt="Naruto"><br><b>鸣人 · Naruto</b></td>
+    <td align="center"><img src="docs/images/鸣人.png" width="100%" alt="Naruto"><br><b>鸣人 · Naruto</b></td>
   </tr>
 </table>
 
