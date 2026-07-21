@@ -43,6 +43,9 @@ else
 fi
 
 for launcher in \
+  "$HOME/Desktop/Codex皮肤 - 启动.command" \
+  "$HOME/Desktop/Codex皮肤 - 一键启动.command" \
+  "$HOME/Desktop/Codex皮肤 - 恢复官方.command" \
   "$HOME/Desktop/Codex Skin Studio.command" \
   "$HOME/Desktop/Codex Skin Studio - Auto Start.command" \
   "$HOME/Desktop/Codex Skin Studio - Restore.command"; do

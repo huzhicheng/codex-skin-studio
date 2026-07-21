@@ -472,10 +472,21 @@ keep_codex_available() {
 }
 
 install_launchers() {
-  local start="$HOME/Desktop/Codex Skin Studio.command"
-  local auto_start="$HOME/Desktop/Codex Skin Studio - Auto Start.command"
-  local restore="$HOME/Desktop/Codex Skin Studio - Restore.command"
+  local start="$HOME/Desktop/Codex皮肤 - 启动.command"
+  local auto_start="$HOME/Desktop/Codex皮肤 - 一键启动.command"
+  local restore="$HOME/Desktop/Codex皮肤 - 恢复官方.command"
   /bin/mkdir -p "$HOME/Desktop"
+  # Clean up our previous English-named launchers so an upgrade does not leave
+  # stale duplicates on the Desktop next to the new Chinese-named set.
+  local legacy
+  for legacy in \
+    "$HOME/Desktop/Codex Skin Studio.command" \
+    "$HOME/Desktop/Codex Skin Studio - Auto Start.command" \
+    "$HOME/Desktop/Codex Skin Studio - Restore.command"; do
+    if [ -f "$legacy" ] && /usr/bin/grep -q '^# CodexSkinStudio launcher$' "$legacy" 2>/dev/null; then
+      /bin/rm -f "$legacy"
+    fi
+  done
   for target in "$start" "$auto_start" "$restore"; do
     if [ -e "$target" ] && ! /usr/bin/grep -q '^# CodexSkinStudio launcher$' "$target" 2>/dev/null; then
       fail "Refusing to overwrite unrelated Desktop file: $target"

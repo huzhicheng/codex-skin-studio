@@ -77,6 +77,8 @@ The screenshots show real locally saved skins. Their original image and video fi
 
 ## Install
 
+> Recommended (easiest): tell the agent you already use (Codex / Claude Code) to "install the skill at github.com/huzhicheng/codex-skin-studio". It clones the repo, runs `install.sh`, and creates the Desktop launchers for you. Restart Codex once and you are set. The manual options below are equivalent.
+
 ### Option 1: double-click installer
 
 1. Choose **Code → Download ZIP** on GitHub and extract the complete repository.
@@ -120,9 +122,9 @@ Ask Codex:
 
 Or use the Desktop launchers:
 
-- `Codex Skin Studio.command`: starts on demand and asks before a required restart.
-- `Codex Skin Studio - Auto Start.command`: a user-initiated one-click activation handoff.
-- `Codex Skin Studio - Restore.command`: removes the skin and restarts Codex normally.
+- `Codex皮肤 - 启动.command`: starts on demand and asks before a required restart.
+- `Codex皮肤 - 一键启动.command`: a user-initiated one-click activation handoff.
+- `Codex皮肤 - 恢复官方.command`: removes the skin and restarts Codex normally.
 
 Once active, **Skin** appears in the primary Codex sidebar. Choose an image or MP4, adjust its focal point, switch between Restrained and Open, or click **Design UI** to create a media-specific structured design. Generated designs remain saved with their skins and can be replaced or switched back to the automatic template without deleting them.
 
@@ -182,7 +184,7 @@ Remove local themes and logs as well:
 
 ### The Skin entry does not appear
 
-Restart Codex once after installation, then use `Codex Skin Studio - Auto Start.command`, or run `doctor` followed by `start`. A failed compatibility check rolls back the visual layer and keeps Codex available; it does not enter an automatic restart loop.
+Restart Codex once after installation, then use `Codex皮肤 - 一键启动.command`, or run `doctor` followed by `start`. A failed compatibility check rolls back the visual layer and keeps Codex available; it does not enter an automatic restart loop.
 
 ### A Codex update breaks the layout
 

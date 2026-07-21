@@ -77,6 +77,8 @@
 
 ## 安装
 
+> 推荐（最省事）：把仓库地址发给你在用的 agent（Codex / Claude Code），说一句「帮我装 github.com/huzhicheng/codex-skin-studio 这个 skill」，它会自动 clone、运行 `install.sh` 并在桌面建好启动器，你重启一次 Codex 就能用。下面是等价的手动方式。
+
 ### 方法一：下载后双击
 
 1. 在 GitHub 页面选择 **Code → Download ZIP**，下载并解压完整仓库。
@@ -120,9 +122,9 @@ cd codex-skin-studio
 
 也可以双击桌面入口：
 
-- `Codex Skin Studio.command`：按需启动；如确实需要重启，会先询问。
-- `Codex Skin Studio - Auto Start.command`：用户主动双击后允许完成一次启动切换。
-- `Codex Skin Studio - Restore.command`：清除皮肤并以官方方式正常重启 Codex。
+- `Codex皮肤 - 启动.command`：按需启动；如确实需要重启，会先询问。
+- `Codex皮肤 - 一键启动.command`：用户主动双击后允许完成一次启动切换。
+- `Codex皮肤 - 恢复官方.command`：清除皮肤并以官方方式正常重启 Codex。
 
 启动成功后，“皮肤”会出现在 Codex 主侧栏动作区。接下来的典型流程是：
 
@@ -188,7 +190,7 @@ SKILL_ROOT="${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio"
 
 ### 安装后没有“皮肤”入口
 
-先重启一次 Codex 让 Skill 被发现，然后双击 `Codex Skin Studio - Auto Start.command`，或运行 `doctor` 后再执行 `start`。如果纯净启动正常而皮肤启动失败，Skin Studio 会回滚注入并保持 Codex 可用，不会自动反复重启。
+先重启一次 Codex 让 Skill 被发现，然后双击 `Codex皮肤 - 一键启动.command`，或运行 `doctor` 后再执行 `start`。如果纯净启动正常而皮肤启动失败，Skin Studio 会回滚注入并保持 Codex 可用，不会自动反复重启。
 
 ### Codex 升级后界面卡住或入口消失
 
