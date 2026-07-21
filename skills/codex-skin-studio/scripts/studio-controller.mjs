@@ -5,7 +5,7 @@ import { spawn, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
-const VERSION = "0.16.4";
+const VERSION = "0.16.5";
 const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "[::1]", "::1"]);
 const GENERATION_TIMEOUT_MS = 180000;
 const MAX_MANIFEST_BYTES = 64 * 1024;

@@ -1079,7 +1079,7 @@
       return text && text.length <= 40;
     });
     const matchers = [
-      (text) => text.startsWith("聊天") || text === "Chats" || text === "Chat",
+      (text) => text === "聊天" || text === "Chats" || text === "Chat",
       (text) => text === "插件" || text === "Plugins" || text === "Plugin",
       (text) => text === "已安排" || text === "Scheduled",
       (text) => text === "站点" || text === "Sites" || text === "Site",
@@ -1126,9 +1126,7 @@
     if (!nativeButton || !nativeWrapper || !nativeGroup) return false;
     const originalText = String(nativeButton.textContent || "").trim();
 
-    const wrapper = nativeWrapper.cloneNode(false);
     const button = nativeButton.cloneNode(true);
-    wrapper.id = "csss-nav-entry";
     button.id = "csss-nav-launcher";
     button.removeAttribute("href");
     button.removeAttribute("aria-keyshortcuts");
@@ -1147,9 +1145,19 @@
       setOpen(!state.open);
     });
 
-    wrapper.replaceChildren(button);
-    nativeWrapper.after(wrapper);
-    state.navEntry = wrapper;
+    const sharedRowContainer = [...nativeWrapper.children].filter((element) =>
+      element.matches?.('button, a, [role="button"]')).length > 1;
+    if (sharedRowContainer) {
+      button.dataset.csssNavEntry = "true";
+      nativeButton.after(button);
+      state.navEntry = button;
+    } else {
+      const wrapper = nativeWrapper.cloneNode(false);
+      wrapper.id = "csss-nav-entry";
+      wrapper.replaceChildren(button);
+      nativeWrapper.after(wrapper);
+      state.navEntry = wrapper;
+    }
     state.navButton = button;
     return true;
   }

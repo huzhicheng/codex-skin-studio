@@ -375,20 +375,41 @@ theme_ready_on_port() {
         const value=JSON.parse(input);
         const ready=Boolean(value.active) && Array.isArray(value.targets) &&
           value.targets.some(target => target.installed && target.manager && target.launcher);
+        if (!ready) {
+          const states=(value.targets || []).map(target => ({
+            installed:Boolean(target.installed), manager:Boolean(target.manager), launcher:Boolean(target.launcher)
+          }));
+          console.error(`[skin-studio] readiness pending: active=${Boolean(value.active)} targets=${JSON.stringify(states)}`);
+        }
         process.exit(ready ? 0 : 1);
-      } catch { process.exit(1); }
+      } catch {
+        console.error("[skin-studio] readiness pending: status response was not valid JSON");
+        process.exit(1);
+      }
     });
   '
 }
 
+wait_for_theme_ready() {
+  local port="$1" required="${2:-3}" limit="${3:-12}"
+  local consecutive=0 deadline=$((SECONDS + limit))
+  while [ "$SECONDS" -lt "$deadline" ]; do
+    /bin/sleep 0.6
+    if theme_ready_on_port "$port"; then
+      consecutive=$((consecutive + 1))
+      [ "$consecutive" -lt "$required" ] || return 0
+    else
+      consecutive=0
+    fi
+  done
+  return 1
+}
+
 preflight_theme() {
-  local port="$1" attempt output
+  local port="$1" output
   output="$(run_controller_limited 18 once --port "$port" --timeout-ms 5500 2>>"$STDERR_LOG")" || return 1
   printf '%s\n' "$output" >> "$STDOUT_LOG"
-  for attempt in 1 2 3; do
-    /bin/sleep 0.7
-    theme_ready_on_port "$port" || return 1
-  done
+  wait_for_theme_ready "$port" 3 12
 }
 
 rollback_theme() {
@@ -564,8 +585,7 @@ case "$command" in
       rollback_theme "$port"
       fail "The Skin Studio watcher could not be handed to macOS. The skin was removed and Codex remains open."
     fi
-    /bin/sleep 0.8
-    if ! /bin/kill -0 "$watcher_pid" 2>/dev/null || ! theme_ready_on_port "$port"; then
+    if ! /bin/kill -0 "$watcher_pid" 2>/dev/null || ! wait_for_theme_ready "$port" 2 10; then
       rollback_theme "$port"
       fail "The Skin Studio health check failed. The skin was removed and Codex remains open without another restart."
     fi
