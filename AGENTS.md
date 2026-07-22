@@ -18,7 +18,10 @@ cd codex-skin-studio
 2. Installs the skill to `~/.codex/skills/codex-skin-studio`.
 3. Creates the Desktop launchers 「Codex皮肤 - 启动 / 一键启动 / 恢复官方」.
 
-Then tell the user to restart Codex once so it discovers the skill.
+Then tell the user to open the Desktop and double-click
+「Codex皮肤 - 一键启动.command」. That launcher restarts Codex and loads the
+skin in one step, so the user does not need to restart Codex manually. Do not
+tell the user to restart Codex themselves.
 
 Do NOT install by copying `skills/codex-skin-studio/` into
 `~/.codex/skills/` directly (for example via a generic skill-installer). That

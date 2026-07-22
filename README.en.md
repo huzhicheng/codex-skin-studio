@@ -81,11 +81,11 @@ The screenshots show real locally saved skins. Their original image and video fi
 
 You are already using Codex, so the simplest way is to paste this whole message to it:
 
-> Install the skill at github.com/huzhicheng/codex-skin-studio. Please install it by running `git clone` and then the repo's own `./install.sh` — that is what creates the three Desktop launchers. When it is done, remind me to restart Codex once.
+> Install the skill at github.com/huzhicheng/codex-skin-studio. Please install it by running `git clone` and then the repo's own `./install.sh` — that is what creates the three Desktop launchers. When it is done, tell me to double-click 「Codex皮肤 - 一键启动」 on the Desktop to start using it.
 
 That "run install.sh" part matters, so don't drop it. If the agent takes a shortcut and just copies the folder into `~/.codex/skills/`, the skill installs but **no Desktop launchers are created** — that is the usual reason they don't show up.
 
-You should then see three launchers on your **Desktop**: 「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」. Fully quit and reopen Codex once, and you are ready.
+You should then see three launchers on your **Desktop**: 「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」. Then just double-click 「Codex皮肤 - 一键启动」 — it restarts Codex and loads the skin for you, so you do not need to restart Codex yourself.
 
 If the launchers still do not show up, tell it: "use codex-skin-studio to install the Desktop launchers" (it fills them in without reinstalling).
 
@@ -93,7 +93,7 @@ If the launchers still do not show up, tell it: "use codex-skin-studio to instal
 
 1. Click the green **Code → Download ZIP** on this page and unzip it.
 2. Open the unzipped folder, **right-click** `Install Codex Skin Studio.command`, and choose **Open**.
-3. It installs everything and creates the Desktop launchers. Reopen Codex once.
+3. It installs everything and creates the Desktop launchers. Then double-click 「Codex皮肤 - 一键启动」 on your Desktop to start — it restarts Codex and loads the skin for you, so you do not need to restart Codex yourself.
 
 (The first time, macOS may say the file is from an unidentified developer — right-click and choose **Open**. You do not need to change any security settings.)
 
@@ -165,7 +165,7 @@ If you prefer a terminal:
 
 ### No "Skin" entry after installing
 
-Fully quit and reopen Codex once (the Skill is only discovered after a restart). Still missing? Double-click 「Codex皮肤 - 一键启动」 on your Desktop; if that does not help, tell Codex "Use codex-skin-studio to run doctor and then start". If a clean launch works but the skin does not, the tool rolls itself back and keeps Codex usable — it never restart-loops.
+The 「皮肤」 button only appears once skin mode is running, so double-click 「Codex皮肤 - 一键启动」 on your Desktop first — it restarts Codex and loads the skin. Still missing after that? Tell Codex "Use codex-skin-studio to run doctor and then start". If a clean launch works but the skin does not, the tool rolls itself back and keeps Codex usable — it never restart-loops.
 
 ### A Codex update breaks the layout or hides the entry
 

@@ -100,11 +100,13 @@ COMMITTED="true"
 if [ -d "$BACKUP_SKILL" ]; then /bin/rm -rf "$BACKUP_SKILL"; fi
 
 printf '\nCodex Skin Studio installed at:\n  %s\n' "$TARGET_SKILL"
-printf 'Restart Codex once so it can discover the new Skill.\n'
 if [ "$INSTALL_LAUNCHERS" = "true" ]; then
-  printf '桌面启动器已就绪。双击「Codex皮肤 - 一键启动.command」即可激活。\n'
+  printf '\n下一步：去桌面双击「Codex皮肤 - 一键启动.command」。\n'
+  printf '它会自动重启 Codex 并载入皮肤，你不用手动重启 Codex。\n'
+else
+  printf 'Restart Codex once so it can discover the new Skill.\n'
 fi
-printf 'You can also ask Codex: “使用 codex-skin-studio 启动皮肤管理器”。\n'
+printf '\n(也可以问 Codex：“使用 codex-skin-studio 启动皮肤管理器”。)\n'
 
 if [ "$ACTIVATE" = "true" ]; then
   printf '\nStarting Skin Studio…\n'
