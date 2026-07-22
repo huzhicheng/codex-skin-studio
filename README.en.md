@@ -79,7 +79,7 @@ The screenshots show real locally saved skins. Their original image and video fi
 
 ### ⭐ Easiest: let your AI install it (recommended, no terminal needed)
 
-You are already using Codex or Claude Code, so the simplest way is to paste this whole message to it:
+You are already using Codex, so the simplest way is to paste this whole message to it:
 
 > Install the skill at github.com/huzhicheng/codex-skin-studio. Please install it by running `git clone` and then the repo's own `./install.sh` — that is what creates the three Desktop launchers. When it is done, remind me to restart Codex once.
 

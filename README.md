@@ -79,7 +79,7 @@
 
 ### ⭐ 最省事：让你的 AI 帮你装（推荐，不用懂命令行）
 
-你既然在用 Codex 或 Claude Code，那最简单的装法就是把下面这段话，**整段复制发给它**：
+你既然在用 Codex，那最简单的装法就是把下面这段话，**整段复制发给它**：
 
 > 帮我安装 github.com/huzhicheng/codex-skin-studio 这个 skill。请务必用 `git clone` 下载整个仓库、再运行里面的 `./install.sh` 来装，这样才会自动在我桌面创建三个中文启动器。装完提醒我重启一次 Codex。
 
