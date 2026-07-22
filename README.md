@@ -49,15 +49,15 @@
 
 <table>
   <tr>
-    <td colspan="2" align="center"><img src="docs/images/户外.png" width="80%" alt="户外"><br><b>户外</b></td>
+    <td colspan="2" align="center"><img src="docs/images/户外.webp" width="80%" alt="户外"><br><b>户外</b></td>
   </tr>
   <tr>
-    <td width="50%" align="center"><img src="docs/images/小野花.png" width="100%" alt="小野花"><br><b>小野花</b></td>
-    <td width="50%" align="center"><img src="docs/images/毛绒.png" width="100%" alt="毛绒"><br><b>毛绒</b></td>
+    <td width="50%" align="center"><img src="docs/images/小野花.webp" width="100%" alt="小野花"><br><b>小野花</b></td>
+    <td width="50%" align="center"><img src="docs/images/毛绒.webp" width="100%" alt="毛绒"><br><b>毛绒</b></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/images/绿感.png" width="100%" alt="绿感"><br><b>绿感</b></td>
-    <td align="center"><img src="docs/images/鸣人.png" width="100%" alt="鸣人"><br><b>鸣人</b></td>
+    <td align="center"><img src="docs/images/绿感.webp" width="100%" alt="绿感"><br><b>绿感</b></td>
+    <td align="center"><img src="docs/images/鸣人.webp" width="100%" alt="鸣人"><br><b>鸣人</b></td>
   </tr>
 </table>
 
