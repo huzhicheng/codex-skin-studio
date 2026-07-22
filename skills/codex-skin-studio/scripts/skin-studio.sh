@@ -448,7 +448,13 @@ quit_codex() {
   /usr/bin/osascript -e 'tell application id "com.openai.codex" to quit' >/dev/null 2>&1 || true
   local deadline=$((SECONDS + 15))
   while codex_running && [ "$SECONDS" -lt "$deadline" ]; do /bin/sleep 0.25; done
-  codex_running && fail "Codex did not close. Close it manually and try again."
+  # Use an if-guard, not `codex_running && fail`: when Codex has closed,
+  # codex_running returns non-zero and, as the function's last command, would
+  # make quit_codex itself return non-zero and trip `set -e` at the bare call
+  # site — killing activation right after the close, before the relaunch.
+  if codex_running; then fail "Codex did not close. Close it manually and try again."; fi
+  # Give macOS a moment to fully release the app before relaunching with CDP.
+  /bin/sleep 2
 }
 
 launch_with_cdp() {
