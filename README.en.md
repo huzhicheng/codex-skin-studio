@@ -77,7 +77,7 @@ The screenshots show real locally saved skins. Their original image and video fi
 
 ## Install
 
-> Recommended (easiest): tell the agent you already use (Codex / Claude Code) to "install the skill at github.com/huzhicheng/codex-skin-studio". It clones the repo, runs `install.sh`, and creates the Desktop launchers for you. Restart Codex once and you are set. The manual options below are equivalent.
+> Recommended (easiest): tell the agent you already use (Codex / Claude Code) to install it **via the repository installer** — `git clone https://github.com/huzhicheng/codex-skin-studio.git && cd codex-skin-studio && ./install.sh`. That runs the signed-runtime preflight, installs the skill, and creates the Desktop launchers. **Do not let it just copy `skills/codex-skin-studio/` into `~/.codex/skills/`** — that installs the skill but creates no launchers. Restart Codex once and you are set. (The repo ships an `AGENTS.md` that steers agents down this path.)
 
 ### Option 1: double-click installer
 

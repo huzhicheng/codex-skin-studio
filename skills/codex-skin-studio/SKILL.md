@@ -9,7 +9,7 @@ Use the bundled macOS launcher and runtime injector. Keep the official app bundl
 
 ## First use
 
-When the user asks to start or use the skin manager after installing this Skill, run `doctor`, then try `start`. If Codex is already running without the verified studio endpoint, explain that one restart is required and ask before using `start --restart`. When the user wants convenient future access, run `install-launchers`; do not require a repository clone after the Skill is installed.
+When the user asks to start or use the skin manager after installing this Skill, run `doctor`, then try `start`. If Codex is already running without the verified studio endpoint, explain that one restart is required and ask before using `start --restart`. When the user wants convenient future access — or when the Desktop launchers are missing because the Skill was copied into `~/.codex/skills` without running `install.sh` — run `install-launchers`; do not require a repository clone after the Skill is installed.
 
 ## Commands
 

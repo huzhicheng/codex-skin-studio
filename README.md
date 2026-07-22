@@ -77,7 +77,7 @@
 
 ## 安装
 
-> 推荐（最省事）：把仓库地址发给你在用的 agent（Codex / Claude Code），说一句「帮我装 github.com/huzhicheng/codex-skin-studio 这个 skill」，它会自动 clone、运行 `install.sh` 并在桌面建好启动器，你重启一次 Codex 就能用。下面是等价的手动方式。
+> 推荐（最省事）：把仓库地址发给你在用的 agent（Codex / Claude Code），让它**按仓库里的 `install.sh` 安装**，也就是执行 `git clone https://github.com/huzhicheng/codex-skin-studio.git && cd codex-skin-studio && ./install.sh`。这样才会跑签名预检、装好 Skill 并在桌面建好中文启动器。**别让它只把 `skills/codex-skin-studio/` 文件夹拷进 `~/.codex/skills/`**——那样虽然 Skill 装上了，却不会创建桌面入口。装完重启一次 Codex 即可。（仓库根已带一份 `AGENTS.md`，会提示 agent 走这条路径。）
 
 ### 方法一：下载后双击
 
