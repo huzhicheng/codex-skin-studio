@@ -19,27 +19,27 @@ The background media keeps its original color treatment. Skin Studio separately 
 
 ### Video themes (local MP4 · live motion)
 
-Previews are high-res looping animations — **click any preview to open its full-quality MP4**.
+Previews are high-res looping animations.
 
 <table>
   <tr>
-    <td width="50%" align="center"><a href="docs/images/地球.mp4"><img src="docs/images/地球.webp" width="100%" alt="Earth"></a><br><b>地球 · Earth</b></td>
-    <td width="50%" align="center"><a href="docs/images/猫咪.mp4"><img src="docs/images/猫咪.webp" width="100%" alt="Cat"></a><br><b>猫咪 · Cat</b></td>
+    <td width="50%" align="center"><img src="docs/images/地球.webp" width="100%" alt="Earth"><br><b>地球 · Earth</b></td>
+    <td width="50%" align="center"><img src="docs/images/猫咪.webp" width="100%" alt="Cat"><br><b>猫咪 · Cat</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/清冷.mp4"><img src="docs/images/清冷.webp" width="100%" alt="Cool"></a><br><b>清冷 · Cool</b></td>
-    <td align="center"><a href="docs/images/山谷.mp4"><img src="docs/images/山谷.webp" width="100%" alt="Valley"></a><br><b>山谷 · Valley</b></td>
+    <td align="center"><img src="docs/images/清冷.webp" width="100%" alt="Cool"><br><b>清冷 · Cool</b></td>
+    <td align="center"><img src="docs/images/山谷.webp" width="100%" alt="Valley"><br><b>山谷 · Valley</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/浪花.mp4"><img src="docs/images/浪花.webp" width="100%" alt="Wave"></a><br><b>浪花 · Wave</b></td>
-    <td align="center"><a href="docs/images/旷野.mp4"><img src="docs/images/旷野.webp" width="100%" alt="Wilds"></a><br><b>旷野 · Wilds</b></td>
+    <td align="center"><img src="docs/images/浪花.webp" width="100%" alt="Wave"><br><b>浪花 · Wave</b></td>
+    <td align="center"><img src="docs/images/旷野.webp" width="100%" alt="Wilds"><br><b>旷野 · Wilds</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/发光刀刃.mp4"><img src="docs/images/发光刀刃.webp" width="100%" alt="Glowing blade"></a><br><b>发光刀刃 · Blade</b></td>
-    <td align="center"><a href="docs/images/伏提庚.mp4"><img src="docs/images/伏提庚.webp" width="100%" alt="Futing"></a><br><b>伏提庚</b></td>
+    <td align="center"><img src="docs/images/发光刀刃.webp" width="100%" alt="Glowing blade"><br><b>发光刀刃 · Blade</b></td>
+    <td align="center"><img src="docs/images/伏提庚.webp" width="100%" alt="Futing"><br><b>伏提庚</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/古风美女.mp4"><img src="docs/images/古风美女.webp" width="100%" alt="Classical"></a><br><b>古风美女 · Classical</b></td>
+    <td align="center"><img src="docs/images/古风美女.webp" width="100%" alt="Classical"><br><b>古风美女 · Classical</b></td>
    
   </tr>
  

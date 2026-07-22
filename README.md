@@ -19,27 +19,27 @@
 
 ### 视频主题（本地 MP4 · 界面实时动态）
 
-预览为高清循环动图，**点击任意预览即可打开对应高清 MP4**。
+预览为高清循环动图。
 
 <table>
   <tr>
-    <td width="50%" align="center"><a href="docs/images/地球.mp4"><img src="docs/images/地球.webp" width="100%" alt="地球"></a><br><b>地球</b></td>
-    <td width="50%" align="center"><a href="docs/images/猫咪.mp4"><img src="docs/images/猫咪.webp" width="100%" alt="猫咪"></a><br><b>猫咪</b></td>
+    <td width="50%" align="center"><img src="docs/images/地球.webp" width="100%" alt="地球"><br><b>地球</b></td>
+    <td width="50%" align="center"><img src="docs/images/猫咪.webp" width="100%" alt="猫咪"><br><b>猫咪</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/清冷.mp4"><img src="docs/images/清冷.webp" width="100%" alt="清冷"></a><br><b>清冷</b></td>
-    <td align="center"><a href="docs/images/山谷.mp4"><img src="docs/images/山谷.webp" width="100%" alt="山谷"></a><br><b>山谷</b></td>
+    <td align="center"><img src="docs/images/清冷.webp" width="100%" alt="清冷"><br><b>清冷</b></td>
+    <td align="center"><img src="docs/images/山谷.webp" width="100%" alt="山谷"><br><b>山谷</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/浪花.mp4"><img src="docs/images/浪花.webp" width="100%" alt="浪花"></a><br><b>浪花</b></td>
-    <td align="center"><a href="docs/images/旷野.mp4"><img src="docs/images/旷野.webp" width="100%" alt="旷野"></a><br><b>旷野</b></td>
+    <td align="center"><img src="docs/images/浪花.webp" width="100%" alt="浪花"><br><b>浪花</b></td>
+    <td align="center"><img src="docs/images/旷野.webp" width="100%" alt="旷野"><br><b>旷野</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/发光刀刃.mp4"><img src="docs/images/发光刀刃.webp" width="100%" alt="发光刀刃"></a><br><b>发光刀刃</b></td>
-    <td align="center"><a href="docs/images/伏提庚.mp4"><img src="docs/images/伏提庚.webp" width="100%" alt="伏提庚"></a><br><b>伏提庚</b></td>
+    <td align="center"><img src="docs/images/发光刀刃.webp" width="100%" alt="发光刀刃"><br><b>发光刀刃</b></td>
+    <td align="center"><img src="docs/images/伏提庚.webp" width="100%" alt="伏提庚"><br><b>伏提庚</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="docs/images/古风美女.mp4"><img src="docs/images/古风美女.webp" width="100%" alt="古风美女"></a><br><b>古风美女</b></td>
+    <td align="center"><img src="docs/images/古风美女.webp" width="100%" alt="古风美女"><br><b>古风美女</b></td>
   
   </tr>
 
