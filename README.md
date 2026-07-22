@@ -5,6 +5,14 @@
 给 macOS Codex 桌面应用换上由本地图片或 MP4 驱动的完整界面皮肤。它会统一处理左侧导航、标题栏、工作区、卡片、输入区、菜单、设置页和弹窗，而不是在每个区域重复平铺一张壁纸。
 
 <p align="center">
+  <a href="#效果预览"><b>🖼️ 界面预览</b></a>
+  &nbsp;·&nbsp;
+  <a href="#安装"><b>🚀 开始安装</b></a>
+  &nbsp;·&nbsp;
+  <a href="#第一次使用"><b>📖 使用介绍</b></a>
+</p>
+
+<p align="center">
   <video src="https://github.com/user-attachments/assets/95fe8248-2b05-43fa-a326-4b05a29722eb" width="60%" autoplay muted loop playsinline controls></video>
   <br>
   <em>“彩色” · 一段完整界面巡览：首页 → 皮肤管理 → 站点 → 已安排 → 插件</em>
