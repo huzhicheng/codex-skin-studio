@@ -87,15 +87,13 @@
 
 ### ⭐ 最省事：让你的 AI 帮你装（推荐，不用懂命令行）
 
-你既然在用 Codex，那最简单的装法就是把下面这段话，**整段复制发给它**：
+你既然在用 Codex，那最简单的装法就是把下面这句话，**直接发给它**：
 
-> **帮我安装 github.com/huzhicheng/codex-skin-studio 这个 skill。用 skill-installer 安装仓库里 `skills/codex-skin-studio` 这个 skill 就行，不用 clone 整个仓库。装好后再跑一下 `~/.codex/skills/codex-skin-studio/scripts/skin-studio.sh install-launchers`，在我桌面创建三个中文启动器。**
+> 帮我安装 github.com/huzhicheng/codex-skin-studio 这个 skill，装好后在我桌面创建启动器。
 
-那句「跑 install-launchers」很关键，别删——只装 skill 不会自动建桌面启动器，得靠这句补上（这就是启动器没出现的常见原因）。
+装好后桌面会出现三个中文入口：「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」。然后去桌面**双击「Codex皮肤 - 一键启动」**就能用——它会自动重启 Codex 并载入皮肤，你不用自己手动重启。
 
-装好后桌面会出现三个中文入口：「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」。然后直接去桌面**双击「Codex皮肤 - 一键启动」**就能用——它会自动重启 Codex 并载入皮肤，你不用自己手动重启。
-
-万一桌面还是没出现那三个入口，就再对它说一句：「用 codex-skin-studio 安装桌面启动器」（它会补建，不用重装）。
+万一桌面没出现那三个入口，就再对它说一句：「用 codex-skin-studio 安装桌面启动器」。
 
 ### 或者：下载后双击安装
 

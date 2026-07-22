@@ -87,15 +87,13 @@ The screenshots show real locally saved skins. Their original image and video fi
 
 ### ⭐ Easiest: let your AI install it (recommended, no terminal needed)
 
-You are already using Codex, so the simplest way is to paste this whole message to it:
+You are already using Codex, so the simplest way is to send it this one line:
 
-> Install the skill at github.com/huzhicheng/codex-skin-studio. Use skill-installer to install the skill at `skills/codex-skin-studio` from that repo — no need to clone the whole repository. Then run `~/.codex/skills/codex-skin-studio/scripts/skin-studio.sh install-launchers` to create the three Desktop launchers.
-
-That "run install-launchers" part matters, so don't drop it. Installing the skill on its own does **not** create the Desktop launchers — that command adds them, and skipping it is the usual reason they don't show up.
+> Install the skill at github.com/huzhicheng/codex-skin-studio, and create the Desktop launchers after installing.
 
 You should then see three launchers on your **Desktop**: 「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」. Then just double-click 「Codex皮肤 - 一键启动」 — it restarts Codex and loads the skin for you, so you do not need to restart Codex yourself.
 
-If the launchers still do not show up, tell it: "use codex-skin-studio to install the Desktop launchers" (it fills them in without reinstalling).
+If the launchers do not show up, tell it: "use codex-skin-studio to install the Desktop launchers".
 
 ### Or: download and double-click
 
