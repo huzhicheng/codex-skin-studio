@@ -107,23 +107,21 @@ cd codex-skin-studio
 
 ## 第一次使用
 
-最简单的方式是对 Codex 说：
+装完后，桌面上会有三个入口。最常用的是「Codex皮肤 - 一键启动」，双击它，皮肤模式就开起来了。
 
-> 使用 codex-skin-studio 启动皮肤管理器。
+- 「Codex皮肤 - 一键启动」：双击开启皮肤模式，需要重启 Codex 时会自动处理。
+- 「Codex皮肤 - 启动」：按需启动；如果确实要重启，会先问你一句。
+- 「Codex皮肤 - 恢复官方」：一键清掉皮肤，变回官方界面。
 
-也可以双击桌面入口：
+也可以直接对 Codex 说「使用 codex-skin-studio 启动皮肤管理器」，效果一样。
 
-- `Codex皮肤 - 启动.command`：按需启动；如确实需要重启，会先询问。
-- `Codex皮肤 - 一键启动.command`：用户主动双击后允许完成一次启动切换。
-- `Codex皮肤 - 恢复官方.command`：清除皮肤并以官方方式正常重启 Codex。
+启动成功后，「皮肤」会出现在 Codex 左侧的功能区。接下来这么玩：
 
-启动成功后，“皮肤”会出现在 Codex 主侧栏动作区。接下来的典型流程是：
-
-1. 点击“皮肤”，选择一张图片或一个 MP4。
-2. 调整媒体焦点，让人物或主体保持在合适位置。
-3. 在 **内敛**、**灵动**之间即时切换。
-4. 想要当前媒体专属的界面语言时，选择生成胆量并点击 **设计UI**。
-5. 生成完成后切换到 **AI 设计**；不满意可以重新生成，或随时退回自动的灵动模板。
+1. 点「皮肤」，选一张图片或一个 MP4。
+2. 拖一下焦点，让人物或主体停在合适的位置。
+3. 在「内敛」和「灵动」之间随手切换，看哪个顺眼。
+4. 想要这张图专属的界面风格，就选个生成胆量、点 **设计UI**。
+5. 生成好之后切到「AI 设计」；不满意可以重新生成，或随时切回自动的「灵动」。
 
 ## 面板和 Skill 分别做什么
 
@@ -138,66 +136,50 @@ cd codex-skin-studio
 - **AI 设计**：由 Skill 为当前媒体生成的独立结构化方案；生成前不可选，生成后会和当前皮肤一起保存。
 - **生成胆量**：沉稳、奔放、疯狂只影响下一次“设计UI”的结构大胆程度，不会改变原图色调。
 
-## 常用命令
+## 平时怎么开关皮肤
+
+不用记命令，双击桌面入口就行：
+
+- **开皮肤**：双击「Codex皮肤 - 一键启动」。
+- **变回官方界面**：双击「Codex皮肤 - 恢复官方」。
+- **想自检一下**：对 Codex 说「使用 codex-skin-studio 跑一下 doctor」。
+
+熟悉终端的话，这些动作也都封装在了 `~/.codex/skills/codex-skin-studio/scripts/skin-studio.sh` 里，比如 `doctor`、`start`、`status`、`restore`。
+
+## 卸载
+
+想彻底卸载，最省事的是对 Codex 说「帮我卸载 codex-skin-studio」。它会清掉工具和桌面入口，你保存的皮肤默认保留。
+
+熟悉终端的话：
 
 ```bash
-SKILL_ROOT="${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio"
-
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" doctor
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" install-launchers
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" start
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" status
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" restore
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" restore --restart
-```
-
-## 恢复与卸载
-
-只恢复官方界面、不重启 Codex：
-
-```bash
-/bin/bash "${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio/scripts/skin-studio.sh" restore
-```
-
-完全恢复并正常重启：
-
-```bash
-/bin/bash "${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio/scripts/skin-studio.sh" restore --restart
-```
-
-卸载 Skill 和桌面入口，但保留本地主题：
-
-```bash
-./uninstall.sh
-```
-
-同时删除本地主题和日志：
-
-```bash
-./uninstall.sh --restart --purge-data
+# 卸载，保留已存皮肤
+~/.codex/skills/codex-skin-studio/scripts/uninstall.sh
+# 连本地皮肤和日志一起删
+~/.codex/skills/codex-skin-studio/scripts/uninstall.sh --restart --purge-data
 ```
 
 ## 常见问题
 
-### 安装后没有“皮肤”入口
+### 装完没有「皮肤」入口
 
-先重启一次 Codex 让 Skill 被发现，然后双击 `Codex皮肤 - 一键启动.command`，或运行 `doctor` 后再执行 `start`。如果纯净启动正常而皮肤启动失败，Skin Studio 会回滚注入并保持 Codex 可用，不会自动反复重启。
+先把 Codex 完全退出、重新打开一次（Skill 要重启后才会被发现）。还是没有的话，双击桌面「Codex皮肤 - 一键启动」；再不行，就对 Codex 说「使用 codex-skin-studio 跑一下 doctor 再启动」。如果干净启动正常、只是皮肤没起来，工具会自动撤掉注入、保持 Codex 能正常用，不会反复重启。
 
 ### Codex 升级后界面卡住或入口消失
 
-先执行 `doctor` 和 `status`。选择器不兼容时项目会失败关闭，不会扩大匹配范围或修改应用包。可先执行 `restore` 使用官方界面，再更新 Skin Studio。
+先双击「Codex皮肤 - 恢复官方」变回官方界面，把 Codex 更新好，再重新启动皮肤。也可以对 Codex 说「使用 codex-skin-studio 跑一下 doctor 和 status」看看哪里不对；选择器不兼容时它会安全关闭，不会乱改你的应用。
 
-### 图片没有铺满，或人物太大
+### 图片没铺满，或者人物太大
 
-背景默认使用整窗 `cover`，不会为了显示完整图片而缩小留边。使用管理器里的焦点位置保护主体；横竖比差异很大时，窗口边缘会按 `cover` 规则裁切。
+背景默认整窗铺满，不会为了显示完整图片而缩小留白。用管理器里的「焦点位置」把主体拖到合适的地方；图片和窗口比例差很多时，边缘会裁掉一点。
 
-### MP4 无法播放
+### MP4 播不了
 
-视频解码或播放失败只影响视觉层，Skin Studio 会保留本地提取的封面帧；异常不会触发 Codex 重启。
+视频解码或播放失败只影响画面层，工具会自动保留本地封面帧顶上，不会因此重启 Codex。
 
-### 深浅色切换后文字或停止按钮看不清
+### 深浅色切换后，文字或停止按钮看不清
 
-从 v0.16.3 起，Skin Studio 会在 ChatGPT/Codex 工作区切换时重新校准皮肤变量，并单独保护导航文字、图标和发送/停止按钮的语义对比度。v0.16.4 进一步隔离头像菜单、设置页等原生弹层导航，避免皮肤装饰重绘阻塞界面。v0.16.5 适配新版合并式侧栏容器，并把启动健康检查改为有上限的连续稳定检查，避免一次短暂重绘误判后回滚成功注入。
+新版会在深浅色切换时重新校准皮肤配色，并单独保护导航文字、图标和发送/停止按钮的对比度。万一还是看不清，双击「Codex皮肤 - 恢复官方」，再重新启动一次皮肤就好。
 
 ## 隐私与安全
 

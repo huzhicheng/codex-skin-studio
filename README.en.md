@@ -107,17 +107,21 @@ Rerun `./install.sh` to upgrade; it keeps your saved skins.
 
 ## First run
 
-Ask Codex:
+After installing, you get three launchers on your Desktop. The one you will use most is 「Codex皮肤 - 一键启动」 — double-click it and skin mode turns on.
 
-> Use codex-skin-studio to start the skin manager.
+- 「Codex皮肤 - 一键启动」: double-click to turn on skin mode; it handles the Codex restart for you if one is needed.
+- 「Codex皮肤 - 启动」: starts on demand and asks first if a restart is really required.
+- 「Codex皮肤 - 恢复官方」: one click to clear the skin and go back to the official look.
 
-Or use the Desktop launchers:
+You can also just tell Codex "Use codex-skin-studio to start the skin manager" — same result.
 
-- `Codex皮肤 - 启动.command`: starts on demand and asks before a required restart.
-- `Codex皮肤 - 一键启动.command`: a user-initiated one-click activation handoff.
-- `Codex皮肤 - 恢复官方.command`: removes the skin and restarts Codex normally.
+Once active, **Skin** appears in the Codex sidebar. Then:
 
-Once active, **Skin** appears in the primary Codex sidebar. Choose an image or MP4, adjust its focal point, switch between Restrained and Open, or click **Design UI** to create a media-specific structured design. Generated designs remain saved with their skins and can be replaced or switched back to the automatic template without deleting them.
+1. Click **Skin** and pick an image or an MP4.
+2. Drag the focal point so the subject sits where you want.
+3. Switch between **Restrained** and **Open** to see which you like.
+4. Want a look made just for this image? Pick a boldness level and click **Design UI**.
+5. When it finishes, switch to **AI design**; regenerate if you are not happy, or switch back to the automatic **Open** template anytime.
 
 ## Manager vs. Skill
 
@@ -132,66 +136,50 @@ The `codex-skin-studio` Skill handles installation, compatibility diagnostics, s
 - **AI design** applies the independent structured design generated for the current media.
 - **Generation boldness** controls the next Design UI request (Subtle, Wild, or Crazy) without changing the source image colors.
 
-## Commands
+## Turning skins on and off day to day
+
+No commands to memorize — just double-click a Desktop launcher:
+
+- **Turn a skin on**: double-click 「Codex皮肤 - 一键启动」.
+- **Go back to the official look**: double-click 「Codex皮肤 - 恢复官方」.
+- **Run a self-check**: tell Codex "Use codex-skin-studio to run doctor".
+
+If you prefer a terminal, all of these live in `~/.codex/skills/codex-skin-studio/scripts/skin-studio.sh` (`doctor`, `start`, `status`, `restore`).
+
+## Uninstall
+
+The easiest way is to tell Codex "Uninstall codex-skin-studio for me". It removes the tool and the Desktop launchers; your saved skins are kept by default.
+
+If you prefer a terminal:
 
 ```bash
-SKILL_ROOT="${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio"
-
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" doctor
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" install-launchers
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" start
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" status
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" restore
-/bin/bash "$SKILL_ROOT/scripts/skin-studio.sh" restore --restart
-```
-
-## Restore and uninstall
-
-Live restore without restarting Codex:
-
-```bash
-/bin/bash "${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio/scripts/skin-studio.sh" restore
-```
-
-Full restore and normal restart:
-
-```bash
-/bin/bash "${CODEX_HOME:-$HOME/.codex}/skills/codex-skin-studio/scripts/skin-studio.sh" restore --restart
-```
-
-Remove the Skill and launchers while preserving local themes:
-
-```bash
-./uninstall.sh
-```
-
-Remove local themes and logs as well:
-
-```bash
-./uninstall.sh --restart --purge-data
+# Uninstall, keep saved skins
+~/.codex/skills/codex-skin-studio/scripts/uninstall.sh
+# Also delete local skins and logs
+~/.codex/skills/codex-skin-studio/scripts/uninstall.sh --restart --purge-data
 ```
 
 ## Troubleshooting
 
-### The Skin entry does not appear
+### No "Skin" entry after installing
 
-Restart Codex once after installation, then use `Codex皮肤 - 一键启动.command`, or run `doctor` followed by `start`. A failed compatibility check rolls back the visual layer and keeps Codex available; it does not enter an automatic restart loop.
+Fully quit and reopen Codex once (the Skill is only discovered after a restart). Still missing? Double-click 「Codex皮肤 - 一键启动」 on your Desktop; if that does not help, tell Codex "Use codex-skin-studio to run doctor and then start". If a clean launch works but the skin does not, the tool rolls itself back and keeps Codex usable — it never restart-loops.
 
-### A Codex update breaks the layout
+### A Codex update breaks the layout or hides the entry
 
-Run `doctor` and `status`. Skin Studio fails closed when shell markers no longer match. Use `restore` to keep working with the official interface, then update Skin Studio.
+Double-click 「Codex皮肤 - 恢复官方」 to return to the official look, update Codex, then start the skin again. You can also tell Codex "Use codex-skin-studio to run doctor and status" to see what is off; when selectors no longer match it fails safe and never touches your app.
 
 ### The image does not fill the window, or the subject is too large
 
-The canvas uses full-window `cover`, so it does not shrink to create empty borders. Use the focal-point control to protect the subject; large media/window aspect-ratio differences necessarily crop the outer edges.
+The canvas fills the whole window by default and will not shrink to leave empty borders. Use the focal-point control to place the subject where you want; when the image and window aspect ratios differ a lot, the edges get cropped a little.
 
-### MP4 playback fails
+### An MP4 will not play
 
-Playback and decode errors stay inside the visual layer. The locally extracted poster frame remains visible and the error never restarts Codex.
+Playback or decode errors only affect the visual layer. The tool keeps the local poster frame on screen and never restarts Codex over it.
 
-### Contrast changes after switching ChatGPT/Codex workspaces
+### Text or the Stop button is hard to read after a light/dark switch
 
-Since v0.16.3, Skin Studio reconciles active skin tokens across workspace changes and independently protects sidebar labels, icons, and the active Send/Stop action. v0.16.4 additionally isolates native overlay navigation such as the profile menu and Settings so decorative rescans cannot block the renderer. v0.16.5 supports the newer grouped sidebar container and replaces single-snapshot startup health checks with bounded consecutive-stability checks, preventing a transient redraw from rolling back a successful injection.
+Newer versions re-tune the skin colors when you switch light/dark and separately protect the navigation text, icons, and the Send/Stop button. If something is still hard to read, double-click 「Codex皮肤 - 恢复官方」 and start the skin once more.
 
 ## Privacy and security
 
