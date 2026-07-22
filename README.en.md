@@ -77,18 +77,25 @@ The screenshots show real locally saved skins. Their original image and video fi
 
 ## Install
 
-> Recommended (easiest): tell the agent you already use (Codex / Claude Code) to install it **via the repository installer** — `git clone https://github.com/huzhicheng/codex-skin-studio.git && cd codex-skin-studio && ./install.sh`. That runs the signed-runtime preflight, installs the skill, and creates the Desktop launchers. **Do not let it just copy `skills/codex-skin-studio/` into `~/.codex/skills/`** — that installs the skill but creates no launchers. Restart Codex once and you are set. (The repo ships an `AGENTS.md` that steers agents down this path.)
+### ⭐ Easiest: let your AI install it (recommended, no terminal needed)
 
-### Option 1: double-click installer
+You are already using Codex or Claude Code, so the simplest way is to send it this one line:
 
-1. Choose **Code → Download ZIP** on GitHub and extract the complete repository.
-2. Right-click `Install Codex Skin Studio.command` and choose **Open**.
-3. The installer verifies Codex, installs the Skill to `~/.codex/skills/codex-skin-studio`, and creates Desktop launchers.
-4. Restart Codex once so it discovers the new Skill.
+> Install the skill at github.com/huzhicheng/codex-skin-studio
 
-The first launch of a downloaded `.command` file may require confirmation from macOS. Use **Open** from the context menu; do not disable system security protections.
+It installs everything and puts three launchers on your **Desktop**: 「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」. Then fully quit and reopen Codex once, and you are ready.
 
-### Option 2: Terminal
+If the launchers do not show up, just tell it: "use codex-skin-studio to install the Desktop launchers".
+
+### Or: download and double-click
+
+1. Click the green **Code → Download ZIP** on this page and unzip it.
+2. Open the unzipped folder, **right-click** `Install Codex Skin Studio.command`, and choose **Open**.
+3. It installs everything and creates the Desktop launchers. Reopen Codex once.
+
+(The first time, macOS may say the file is from an unidentified developer — right-click and choose **Open**. You do not need to change any security settings.)
+
+### If you are comfortable with a terminal
 
 ```bash
 git clone https://github.com/huzhicheng/codex-skin-studio.git
@@ -96,23 +103,7 @@ cd codex-skin-studio
 ./install.sh
 ```
 
-Install and attempt activation immediately:
-
-```bash
-./install.sh --activate
-```
-
-The installer is safe to rerun for upgrades. Updating the Skill does not remove saved local themes.
-
-### Option 3: ask Codex
-
-Give Codex this repository URL and say:
-
-> Use skill-installer to install the Skill at `skills/codex-skin-studio` from this repository.
-
-After installation and one Codex restart, say:
-
-> Use codex-skin-studio to install the Desktop launchers.
+Rerun `./install.sh` to upgrade; it keeps your saved skins.
 
 ## First run
 

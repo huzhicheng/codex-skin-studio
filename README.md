@@ -77,18 +77,25 @@
 
 ## 安装
 
-> 推荐（最省事）：把仓库地址发给你在用的 agent（Codex / Claude Code），让它**按仓库里的 `install.sh` 安装**，也就是执行 `git clone https://github.com/huzhicheng/codex-skin-studio.git && cd codex-skin-studio && ./install.sh`。这样才会跑签名预检、装好 Skill 并在桌面建好中文启动器。**别让它只把 `skills/codex-skin-studio/` 文件夹拷进 `~/.codex/skills/`**——那样虽然 Skill 装上了，却不会创建桌面入口。装完重启一次 Codex 即可。（仓库根已带一份 `AGENTS.md`，会提示 agent 走这条路径。）
+### ⭐ 最省事：让你的 AI 帮你装（推荐，不用懂命令行）
 
-### 方法一：下载后双击
+你既然在用 Codex 或 Claude Code，那最简单的装法就是把下面这句话，**直接发给它**：
 
-1. 在 GitHub 页面选择 **Code → Download ZIP**，下载并解压完整仓库。
-2. 右键打开 `Install Codex Skin Studio.command`。
-3. 安装器会验证本机 Codex，把 Skill 安装到 `~/.codex/skills/codex-skin-studio`，并在桌面创建启动和恢复入口。
-4. 安装完成后重启一次 Codex，让新 Skill 出现在可用列表中。
+> 帮我安装 github.com/huzhicheng/codex-skin-studio 这个 skill
 
-macOS 首次打开下载的 `.command` 可能要求确认来源。请使用右键菜单中的“打开”，无需关闭系统安全保护。
+它会自动装好，并在你的**桌面**放三个中文入口：「Codex皮肤 - 启动」「Codex皮肤 - 一键启动」「Codex皮肤 - 恢复官方」。装完，把 Codex 完全退出、重新打开一次，就能用了。
 
-### 方法二：终端安装
+万一装完桌面没出现那三个入口，就再对它说一句：「用 codex-skin-studio 安装桌面启动器」。
+
+### 或者：下载后双击安装
+
+1. 在本页面点绿色的 **Code → Download ZIP**，下载后解压。
+2. 打开解压出来的文件夹，**右键**点里面的 `Install Codex Skin Studio.command`，选「打开」。
+3. 它会自动装好、并在桌面建好入口。装完把 Codex 重新打开一次即可。
+
+（macOS 第一次打开这个文件，可能提示"来源不明"，右键选「打开」就行，不用关任何安全设置。）
+
+### 熟悉终端的话
 
 ```bash
 git clone https://github.com/huzhicheng/codex-skin-studio.git
@@ -96,23 +103,7 @@ cd codex-skin-studio
 ./install.sh
 ```
 
-安装并立即尝试启动：
-
-```bash
-./install.sh --activate
-```
-
-安装器可以重复运行来升级。升级 Skill 不会删除已保存的本地主题。
-
-### 方法三：让 Codex 安装
-
-把本仓库地址发给 Codex，然后说：
-
-> 使用 skill-installer 安装这个仓库中 `skills/codex-skin-studio` 路径的 Skill。
-
-安装完成并重启一次 Codex 后，再说：
-
-> 使用 codex-skin-studio 安装桌面启动器。
+重复运行 `./install.sh` 就是升级，不会删掉你已经保存的皮肤。
 
 ## 第一次使用
 
