@@ -4,6 +4,7 @@
   const STYLE_ID = "csss-style";
   const ROOT_ID = "csss-root";
   const ART_ID = "csss-art-layer";
+  const MAIN_SURFACE_SELECTOR = ':is(main.main-surface, main[class*="_MainContentSurface_"])';
   const DB_NAME = "codex-skin-studio";
   const STORE_NAME = "themes";
   const ACTIVE_KEY = "codex-skin-studio.active-theme";
@@ -1206,7 +1207,7 @@
   const OPEN_DECORATION_CLASSES = [
     "csss-open-nav-row", "csss-open-nav-icon", "csss-open-nav-glyph", "csss-open-control",
     "csss-open-nav-label", "csss-open-primary", "csss-open-card", "csss-open-composer",
-    "csss-open-composer-action", "csss-open-field",
+    "csss-open-composer-action", "csss-open-model-picker", "csss-open-field",
     "csss-open-overlay", "csss-open-landing-stage", "csss-open-landing-hero",
     "csss-open-landing-mark", "csss-open-landing-heading",
     "csss-open-landing-suggestions", "csss-open-landing-grid",
@@ -1345,7 +1346,7 @@
   }
 
   function decorateOpenLanding(design) {
-    const main = document.querySelector("main.main-surface");
+    const main = document.querySelector(MAIN_SURFACE_SELECTOR);
     if (!main) return;
     const headings = [
       ...main.querySelectorAll(
@@ -1487,10 +1488,10 @@
       markOpenDecoration(label, "csss-open-nav-label");
       if (icon && button.id !== "csss-nav-launcher") navIconIndex += 1;
     }
-    const main = document.querySelector("main.main-surface");
+    const main = document.querySelector(MAIN_SURFACE_SELECTOR);
     for (const button of [...(main?.querySelectorAll("button") || [])].slice(0, 240)) {
       const className = String(button.className || "");
-      const solid = className.includes("bg-token-foreground");
+      const solid = button.classList.contains("bg-token-foreground");
       if (solid) {
         markOpenDecoration(button, "csss-open-control", {
           "border-radius": `${design.controls.radius}px`,
@@ -1502,7 +1503,7 @@
           ...secondaryStyles,
         });
       }
-      if (className.includes("bg-token-button-background")) {
+      if (button.classList.contains("bg-token-button-background")) {
         markOpenDecoration(button, "csss-open-primary", {
           "border-radius": `${design.controls.radius}px`,
           ...primaryStyles,
@@ -1523,7 +1524,10 @@
     markOpenDecoration(composer, "csss-open-composer", { "border-radius": `${design.composer.radius}px` });
     for (const button of composer?.querySelectorAll("button") || []) {
       markOpenDecoration(button, "csss-open-control", { "border-radius": `${design.composer.controlRadius}px` });
-      if (String(button.className || "").includes("bg-token-foreground")) {
+      if (button.querySelector('[class*="_ModelPickerTrigger"]')) {
+        markOpenDecoration(button, "csss-open-model-picker");
+      }
+      if (button.classList.contains("bg-token-foreground")) {
         markOpenDecoration(button, "csss-open-composer-action");
       }
     }
@@ -2712,8 +2716,8 @@
         viewport: { width: innerWidth, height: innerHeight },
         sidebarWidth: document.querySelector("aside.app-shell-left-panel")?.getBoundingClientRect().width || null,
         navigationRows: document.querySelectorAll("aside.app-shell-left-panel button").length,
-        controls: document.querySelectorAll("main.main-surface button").length,
-        cards: document.querySelectorAll('main.main-surface [class*="border-token-border"][class*="rounded-"]').length,
+        controls: document.querySelectorAll(`${MAIN_SURFACE_SELECTOR} button`).length,
+        cards: document.querySelectorAll(`${MAIN_SURFACE_SELECTOR} [class*="border-token-border"][class*="rounded-"]`).length,
         composer: Boolean(document.querySelector(".composer-surface-chrome")),
         dialogs: document.querySelectorAll('[role="dialog"]').length,
       },
@@ -2873,7 +2877,7 @@
         applyTheme(diagnosticTheme, { persist: false });
         const selectors = [
           "aside.app-shell-left-panel",
-          "main.main-surface",
+          MAIN_SURFACE_SELECTOR,
           "header.app-header-tint",
           ".composer-surface-chrome",
         ];
@@ -2890,7 +2894,7 @@
         });
         const navButton = document.querySelector("aside.app-shell-left-panel .csss-open-nav-row");
         const navIcon = navButton?.querySelector(".csss-open-nav-icon");
-        const primaryButton = document.querySelector("main.main-surface .csss-open-primary");
+        const primaryButton = document.querySelector(`${MAIN_SURFACE_SELECTOR} .csss-open-primary`);
         result = {
           themed: rootElement.classList.contains("csss-themed"),
           styleMode: rootElement.dataset.csssStyle,

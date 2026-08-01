@@ -226,7 +226,7 @@ html.csss-themed[data-csss-canvas="seamless"] #csss-art-layer::after {
   );
 }
 
-html.csss-themed main.main-surface {
+html.csss-themed :is(main.main-surface, main[class*="_MainContentSurface_"]) {
   background: var(--csss-main) !important;
   color: var(--csss-text) !important;
   box-shadow:
@@ -234,18 +234,31 @@ html.csss-themed main.main-surface {
     inset 0 1px 0 color-mix(in oklab, var(--csss-accent) 14%, transparent);
 }
 
+/* Settings has its own full-window layout and therefore does not render inside
+   the normal main surface above. In current Codex builds its right-hand page is
+   an Electron-only bg-token-main-surface-primary plate nested beside the
+   settings app-shell-left-panel. Scope the override to that exact settings
+   shell so the artwork spans the whole window while individual settings cards,
+   inputs, menus, and switches keep their native readable surfaces. */
+html.csss-themed .app-shell-left-panel +
+  [class~="relative"][class~="isolate"][class~="min-w-0"][class~="flex-1"][class~="overflow-visible"]
+  [class~="electron:bg-token-main-surface-primary"] {
+  background: var(--csss-main) !important;
+  color: var(--csss-text) !important;
+}
+
 /* Full-page workspaces (Pull Requests, Sites, …) fill their list and detail
    columns with opaque bg-token-main-surface-primary panels nested inside the
    main surface, which hide the theme artwork. Let the translucent main surface
    and artwork show through them instead of an opaque plate. */
-html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"] {
+html.csss-themed :is(main.main-surface, main[class*="_MainContentSurface_"]) [class~="bg-token-main-surface-primary"] {
   background-color: transparent !important;
 }
 
 /* Sticky sub-headers inside those panels must still mask rows scrolling beneath
    them, so give them a themed translucent backdrop with a blur rather than a
    fully transparent surface. */
-html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"][class~="sticky"] {
+html.csss-themed :is(main.main-surface, main[class*="_MainContentSurface_"]) [class~="bg-token-main-surface-primary"][class~="sticky"] {
   background-color: var(--csss-titlebar) !important;
   backdrop-filter: blur(12px) saturate(1.1);
 }
@@ -255,7 +268,7 @@ html.csss-themed main.main-surface [class~="bg-token-main-surface-primary"][clas
    --csss-right material — it read noticeably darker than the list column next
    to it. Match the workspace tint (the ID in the base rule's :not() gives it
    high specificity, so keep the extra qualifiers here). */
-html.csss-themed main.main-surface aside:not(.app-shell-left-panel):not(#csss-panel) {
+html.csss-themed :is(main.main-surface, main[class*="_MainContentSurface_"]) aside:not(.app-shell-left-panel):not(#csss-panel) {
   background-color: transparent !important;
 }
 
@@ -837,6 +850,7 @@ html.csss-themed[data-csss-style="open"][data-csss-icon-motif="circuit"] aside.a
 
 html.csss-themed[data-csss-style="open"] :is(
   main.main-surface,
+  main[class*="_MainContentSurface_"],
   [role="dialog"],
   [role="menu"],
   [role="listbox"]
@@ -852,6 +866,7 @@ html.csss-themed[data-csss-style="open"] :is(
 
 html.csss-themed[data-csss-style="open"] :is(
   main.main-surface,
+  main[class*="_MainContentSurface_"],
   [role="dialog"],
   [role="menu"],
   [role="listbox"]
@@ -863,6 +878,7 @@ html.csss-themed[data-csss-style="open"] :is(
 
 html.csss-themed[data-csss-style="open"] :is(
   main.main-surface,
+  main[class*="_MainContentSurface_"],
   [role="dialog"],
   [role="menu"],
   [role="listbox"]
@@ -872,6 +888,7 @@ html.csss-themed[data-csss-style="open"] :is(
 
 html.csss-themed[data-csss-style="open"] :is(
   main.main-surface,
+  main[class*="_MainContentSurface_"],
   [role="dialog"],
   [role="menu"],
   [role="listbox"]
@@ -887,6 +904,7 @@ html.csss-themed[data-csss-style="open"] :is(
 
 html.csss-themed[data-csss-style="open"] :is(
   main.main-surface,
+  main[class*="_MainContentSurface_"],
   [role="dialog"],
   [role="menu"],
   [role="listbox"]
@@ -974,27 +992,27 @@ html.csss-themed[data-csss-style="open"][data-csss-secondary="glass"] .csss-open
   backdrop-filter: blur(12px) saturate(1.35);
 }
 
-html.csss-themed[data-csss-style="open"] main.main-surface [class*="border-token-border"][class*="rounded-"]:not(button) {
+html.csss-themed[data-csss-style="open"] :is(main.main-surface, main[class*="_MainContentSurface_"]) [class*="border-token-border"][class*="rounded-"]:not(button) {
   border-color: color-mix(in oklab, var(--csss-accent) 18%, var(--csss-border)) !important;
   border-radius: var(--csss-card-radius) !important;
 }
 
-html.csss-themed[data-csss-style="open"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   border-color: color-mix(in oklab, var(--csss-accent) var(--csss-card-border-strength), var(--csss-border)) !important;
   border-radius: var(--csss-card-radius) !important;
 }
 
-html.csss-themed[data-csss-style="open"][data-csss-card="flat"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"][data-csss-card="flat"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   background: color-mix(in oklab, var(--csss-surface) 86%, transparent) !important;
   box-shadow: none !important;
 }
 
-html.csss-themed[data-csss-style="open"][data-csss-card="layered"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"][data-csss-card="layered"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   background: var(--csss-surface-strong) !important;
   box-shadow: 0 12px 34px color-mix(in oklab, var(--csss-shadow) var(--csss-card-elevation), transparent) !important;
 }
 
-html.csss-themed[data-csss-style="open"][data-csss-card="image-tint"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"][data-csss-card="image-tint"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   background:
     linear-gradient(
       color-mix(in oklab, var(--csss-surface-strong) 82%, transparent),
@@ -1004,11 +1022,11 @@ html.csss-themed[data-csss-style="open"][data-csss-card="image-tint"] main.main-
   box-shadow: 0 10px 28px color-mix(in oklab, var(--csss-shadow) var(--csss-card-elevation), transparent) !important;
 }
 
-html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"][data-csss-card="image-tint"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"][data-csss-card="image-tint"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   background: color-mix(in oklab, var(--csss-accent-soft) 34%, var(--csss-surface-strong)) !important;
 }
 
-html.csss-themed[data-csss-style="open"][data-csss-card="glass"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"][data-csss-card="glass"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   border-color: color-mix(in oklab, white 26%, var(--csss-border)) !important;
   background: color-mix(in oklab, var(--csss-surface-strong) 42%, transparent) !important;
   backdrop-filter: blur(18px) saturate(1.35);
@@ -1017,7 +1035,7 @@ html.csss-themed[data-csss-style="open"][data-csss-card="glass"] main.main-surfa
     inset 0 1px 0 color-mix(in oklab, white 20%, transparent) !important;
 }
 
-html.csss-themed[data-csss-style="open"][data-csss-card="poster"] main.main-surface .csss-open-card {
+html.csss-themed[data-csss-style="open"][data-csss-card="poster"] :is(main.main-surface, main[class*="_MainContentSurface_"]) .csss-open-card {
   border-color: color-mix(in oklab, var(--csss-accent) 74%, var(--csss-border)) !important;
   background: color-mix(in oklab, var(--csss-accent) 16%, var(--csss-surface-strong)) !important;
   box-shadow:
@@ -1050,6 +1068,25 @@ html.csss-themed[data-csss-style="open"][data-csss-canvas="seamless"] .composer-
 
 html.csss-themed[data-csss-style="open"] .composer-surface-chrome button[class*="rounded-full"] {
   border-radius: var(--csss-composer-control-radius) !important;
+}
+
+/* The current model picker keeps its primary and effort labels on nested
+   token-colored nodes. Give the whole control an opaque-enough quiet surface,
+   then protect both labels from the artwork beneath it. */
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-control.csss-open-model-picker {
+  border-color: color-mix(in oklab, var(--csss-text) 24%, var(--csss-border)) !important;
+  background: var(--color-background-control-opaque, var(--csss-bg)) !important;
+  color: var(--csss-text) !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-control.csss-open-model-picker [class*="_ModelPickerTriggerModel"] {
+  color: var(--csss-text) !important;
+  opacity: 1 !important;
+}
+
+html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-open-control.csss-open-model-picker [class*="_ModelPickerTriggerEffort"] {
+  color: var(--csss-muted) !important;
+  opacity: 1 !important;
 }
 
 /* The right-most composer action is a semantic primary control. It must not
@@ -1095,7 +1132,7 @@ html.csss-themed[data-csss-style="open"] .composer-surface-chrome button.csss-op
    rate-limit "查看重置次数" action) must not inherit Open's dark secondary surface,
    which would leave dark text on a dark plate. Restore a legible light fill with
    dark ink. The composer send/stop action is handled by its own rules above. */
-html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) {
+html.csss-themed[data-csss-style="open"] button[class~="bg-token-foreground"]:not(.csss-open-composer-action) {
   border-color: color-mix(in oklab, var(--csss-text) 68%, var(--csss-border)) !important;
   background: var(--csss-text) !important;
   background-color: var(--csss-text) !important;
@@ -1103,11 +1140,11 @@ html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-tok
   color: var(--csss-bg) !important;
 }
 
-html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) * {
+html.csss-themed[data-csss-style="open"] button[class~="bg-token-foreground"]:not(.csss-open-composer-action) * {
   color: inherit !important;
 }
 
-html.csss-themed[data-csss-style="open"] button.csss-open-control[class*="bg-token-foreground"]:not(.csss-open-composer-action) :is(svg, path, rect, circle) {
+html.csss-themed[data-csss-style="open"] button[class~="bg-token-foreground"]:not(.csss-open-composer-action) :is(svg, path, rect, circle) {
   fill: currentColor !important;
   opacity: 1 !important;
 }

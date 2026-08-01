@@ -5,7 +5,7 @@ import { spawn, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
-const VERSION = "0.16.7";
+const VERSION = "0.16.11";
 const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "[::1]", "::1"]);
 const GENERATION_TIMEOUT_MS = 180000;
 const MAX_MANIFEST_BYTES = 64 * 1024;
@@ -276,6 +276,7 @@ async function probeSession(session) {
     const markers = {
       body: Boolean(document.body),
       mainSurface: Boolean(document.querySelector('main.main-surface')),
+      mainContentSurface: Boolean(document.querySelector('main[class*="_MainContentSurface_"]')),
       sidebar: Boolean(document.querySelector('aside.app-shell-left-panel')),
       mainRole: Boolean(document.querySelector('[role="main"]')),
       composer: Boolean(document.querySelector('.composer-surface-chrome')),
@@ -285,7 +286,8 @@ async function probeSession(session) {
       title: document.title,
       markers,
       codex: location.protocol === 'app:' && markers.body &&
-        (markers.mainSurface || markers.mainRole) && (markers.sidebar || markers.composer),
+        (markers.mainSurface || markers.mainContentSurface || markers.mainRole) &&
+        (markers.sidebar || markers.composer),
     };
   })()`);
 }
@@ -1513,11 +1515,11 @@ async function surfaceMap(options) {
         }
         const tokens = Object.fromEntries(tokenNames.sort().slice(0, 420).map((name) => [name, rootStyle.getPropertyValue(name).trim()]));
         const selectors = [
-          'aside.app-shell-left-panel', 'main.main-surface', 'header.app-header-tint',
+          'aside.app-shell-left-panel', ':is(main.main-surface, main[class*="_MainContentSurface_"])', 'header.app-header-tint',
           '.composer-surface-chrome', '[role="main"]', '[role="dialog"]', '[role="menu"]',
           '[data-radix-popper-content-wrapper]', '[class*="settings" i]', '[class*="right-panel" i]',
-          'aside.app-shell-left-panel button', 'main.main-surface button',
-          '.composer-surface-chrome button', 'main.main-surface [class*="rounded"]'
+          'aside.app-shell-left-panel button', ':is(main.main-surface, main[class*="_MainContentSurface_"]) button',
+          '.composer-surface-chrome button', ':is(main.main-surface, main[class*="_MainContentSurface_"]) [class*="rounded"]'
         ];
         const surfaces = selectors.map((selector) => {
           const elements = [...document.querySelectorAll(selector)].slice(0, 8);
