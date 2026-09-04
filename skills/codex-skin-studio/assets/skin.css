@@ -1149,6 +1149,35 @@ html.csss-themed[data-csss-style="open"] button[class~="bg-token-foreground"]:no
   opacity: 1 !important;
 }
 
+/* Current project/setup dialogs expose their primary action semantically as a
+   form submit button. Do not depend only on the native background utility: its
+   name has changed between Codex builds, and the native disabled opacity can
+   otherwise blend both the fill and its dark ink into the dialog surface.
+   Destructive submits keep their native danger treatment. */
+html.csss-themed[data-csss-style="open"] [role="dialog"] form
+  button[type="submit"]:not([class*="charts-red"]):not([class*="danger"]) {
+  border-color: color-mix(in oklab, var(--csss-accent) 72%, var(--csss-border)) !important;
+  background: var(--csss-accent) !important;
+  background-color: var(--csss-accent) !important;
+  background-image: none !important;
+  color: var(--csss-accent-ink) !important;
+  opacity: 1 !important;
+}
+
+html.csss-themed[data-csss-style="open"] [role="dialog"] form
+  button[type="submit"]:not([class*="charts-red"]):not([class*="danger"]) * {
+  color: inherit !important;
+}
+
+html.csss-themed[data-csss-style="open"] [role="dialog"] form
+  button[type="submit"]:disabled:not([class*="charts-red"]):not([class*="danger"]) {
+  border-color: color-mix(in oklab, var(--csss-accent) 38%, var(--csss-border)) !important;
+  background: color-mix(in oklab, var(--csss-accent) 32%, var(--csss-surface-strong)) !important;
+  color: color-mix(in oklab, var(--csss-text) 78%, var(--csss-muted)) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
 html.csss-themed[data-csss-style="open"] :is(
   [role="dialog"],
   [role="menu"],
